@@ -1,10 +1,22 @@
-import React, { memo } from "react";
+import React from "react";
 import styled from "styled-components";
 import BackgroundImg from "../../img/bg5.jpg";
+import LoginForm from "./LoginForm";
 
-const Login: React.FC = memo(() => {
-  return <MainDiv>hello</MainDiv>;
-});
+interface LoginProps {
+  email: string;
+  password: string;
+  setEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const Login: React.FC<LoginProps> = ({ email, password, setEmail, setPassword }) => {
+  return (
+    <MainDiv>
+      <LoginForm email={email} password={password} setEmail={setEmail} setPassword={setPassword} />
+    </MainDiv>
+  );
+};
 
 const MainDiv = styled.div`
   background: url(${BackgroundImg}) center center fixed;
@@ -17,6 +29,9 @@ const MainDiv = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default Login;

@@ -6,7 +6,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import ReduxThunk from "redux-thunk";
 import { createLogger } from "redux-logger";
-import rootReducer from "./modules/rootReducer";
+import rootReducer from "./store/rootReducer";
 import "./index.css";
 
 const logger = createLogger();
