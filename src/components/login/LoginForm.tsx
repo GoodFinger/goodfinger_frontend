@@ -3,6 +3,7 @@ import styled from "styled-components";
 import emailIcon from "../../img/envelope.png";
 import passwordIcon from "../../img/closed-lock.png";
 import "../../goodfinger.scss";
+import { Link } from "react-router-dom";
 
 interface LoginProps {
   email: string;
@@ -49,7 +50,9 @@ const LoginForm: React.FC<LoginProps> = ({ email, password, setEmail, setPasswor
       <LoginBtn>Login</LoginBtn>
       <div className="signup">
         <div>You don't have account?</div>
-        <SignUpLink>create account</SignUpLink>
+        <SignUpLink>
+          <Link to="/signup">create account</Link>
+        </SignUpLink>
       </div>
     </Layout>
   );

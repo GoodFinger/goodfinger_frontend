@@ -11,6 +11,12 @@
   .signup {
     font-size: 12px;
     margin-top: 37px;
+
+    a {
+      &:visited {
+        color: black;
+      }
+    }
   }
 }
 
