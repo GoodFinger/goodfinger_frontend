@@ -17,7 +17,12 @@ const SignupContainer: React.FC<User> = () => {
 
   const onChangeType = (e: React.MouseEvent) => {
     const { id } = e.currentTarget;
-    setUserType(id);
+
+    if (id === "back") {
+      setUserType("");
+    } else {
+      setUserType(id);
+    }
   };
 
   return (

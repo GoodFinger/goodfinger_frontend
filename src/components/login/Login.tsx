@@ -8,12 +8,19 @@ interface LoginProps {
   password: string;
   setEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  getUserLogin: (e: React.MouseEvent) => void;
 }
 
-const Login: React.FC<LoginProps> = ({ email, password, setEmail, setPassword }) => {
+const Login: React.FC<LoginProps> = ({ email, password, setEmail, setPassword, getUserLogin }) => {
   return (
     <MainDiv>
-      <LoginForm email={email} password={password} setEmail={setEmail} setPassword={setPassword} />
+      <LoginForm
+        email={email}
+        password={password}
+        setEmail={setEmail}
+        setPassword={setPassword}
+        getUserLogin={getUserLogin}
+      />
     </MainDiv>
   );
 };
