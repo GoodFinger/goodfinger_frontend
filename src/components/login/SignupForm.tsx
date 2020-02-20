@@ -6,6 +6,8 @@ import emailIcon from "../../img/envelope.png";
 import passwordIcon from "../../img/closed-lock.png";
 import userIcon from "../../img/user.png";
 import cakeIcon from "../../img/cake.png";
+import { emailValidation, birthValidation } from "../../lib/formValidation";
+import FormInput from "../common/FormInput";
 
 interface SignupProps {
   email: string;
@@ -32,6 +34,9 @@ const SignupForm: React.FC<SignupProps> = ({
   setBirth,
   onChangeType
 }) => {
+  const isEmailForm = emailValidation(email);
+  const isBirthForm = birthValidation(birth);
+
   return (
     <Layout className="">
       <BackDiv>
@@ -39,62 +44,46 @@ const SignupForm: React.FC<SignupProps> = ({
       </BackDiv>
       <SignupTitle>Signup GoodFinger</SignupTitle>
       <div>
-        <div>
-          <span>
-            <Icon src={emailIcon} alt="email-icon" />
-            <FormDiv>
-              <FormInput
-                name="email"
-                placeholder="email"
-                type="text"
-                onChange={setEmail}
-                value={email}
-              ></FormInput>
-            </FormDiv>
-          </span>
-        </div>
-        <div>
-          <span>
-            <Icon src={userIcon} alt="user-icon" />
-          </span>
-          <FormDiv>
-            <FormInput
-              name="userName"
-              placeholder="name"
-              type="text"
-              onChange={setUserName}
-              value={userName}
-            ></FormInput>
-          </FormDiv>
-        </div>
-        <div>
-          <span>
-            <Icon src={passwordIcon} alt="password-icon" />
-          </span>
-          <FormDiv>
-            <FormInput
-              name="password"
-              placeholder="password"
-              type="password"
-              onChange={setPassword}
-              value={password}
-            ></FormInput>
-          </FormDiv>
-        </div>
-        <div>
-          <span>
-            <Icon src={cakeIcon} alt="cake-icon" />
-          </span>
-          <FormDiv>
-            <FormInput
-              name="birth"
-              placeholder="birhday"
-              type="text"
-              onChange={setBirth}
-              value={birth}
-            ></FormInput>
-          </FormDiv>
-        </div>
+        <FormInput
+          name="email"
+          placeholder="email"
+          type="text"
+          changeAction={setEmail}
+          value={email}
+          isValid={isEmailForm}
+          iconSrc={emailIcon}
+          alertMessage="이메일 형식이 맞지 않습니다."
+        ></FormInput>
+        <FormInput
+          name="userName"
+          placeholder="name"
+          type="text"
+          changeAction={setUserName}
+          value={userName}
+          isValid={true}
+          iconSrc={userIcon}
+          alertMessage=""
+        ></FormInput>
+        <FormInput
+          name="password"
+          placeholder="password"
+          type="password"
+          changeAction={setPassword}
+          value={password}
+          isValid={true}
+          iconSrc={passwordIcon}
+          alertMessage=""
+        ></FormInput>
+        <FormInput
+          name="birth"
+          placeholder="birthday(1999-01-03)"
+          type="text"
+          changeAction={setBirth}
+          value={birth}
+          isValid={isBirthForm}
+          iconSrc={cakeIcon}
+          alertMessage="형식(1999-01-03)이 맞지 않습니다."
+        ></FormInput>
       </div>
       <div>
         <SignupIcon>Sign up</SignupIcon>
@@ -109,7 +98,7 @@ const SignupIcon = styled.span`
   padding: 10px 30px;
   border: 1px solid #8f908f;
   border-radius: 10px;
-  margin-top: 28px;
+  margin-top: 16px;
   cursor: pointer;
   &:hover {
     background-color: #615d81;
@@ -128,6 +117,7 @@ const BackDiv = styled.div`
 const SignupTitle = styled.div`
   font-size: 20px;
   font-weight: bold;
+  margin-bottom: 14px;
 `;
 
 const Layout = styled.div`
@@ -138,31 +128,6 @@ const Layout = styled.div`
   padding: 20px;
   box-shadow: 7px 4px 7px #7b7b7b;
   min-width: 250px;
-`;
-
-const Icon = styled.img`
-  width: 24px;
-  margin-right: 10px;
-`;
-
-const FormInput = styled.input`
-  border: none;
-  padding-bottom: 5px;
-  padding-top: 10px;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  font-size: 14px;
-`;
-
-const FormDiv = styled.div`
-  height: 40px;
-  position: relative;
-  border-bottom: 1px solid #909090;
-  width: 65%;
-  margin-top: 10px;
-  display: inline-block;
 `;
 
 export default SignupForm;

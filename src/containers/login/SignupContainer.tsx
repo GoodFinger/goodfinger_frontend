@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Signup from "../../components/login/Signup";
 import useInput from "../../lib/useInput";
 
@@ -10,10 +10,6 @@ const SignupContainer: React.FC<User> = () => {
   const [userName, setUserName] = useInput("");
   const [birth, setBirth] = useInput("");
   const [userType, setUserType] = useState("");
-
-  useEffect(() => {
-    console.log(email, password, userName, birth);
-  });
 
   const onChangeType = (e: React.MouseEvent) => {
     const { id } = e.currentTarget;
