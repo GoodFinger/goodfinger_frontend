@@ -15,6 +15,7 @@ interface SignupProps {
   setUserName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setBirth: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeType: (e: React.MouseEvent) => void;
+  insertUser: (e: React.MouseEvent) => void;
 }
 
 const Login: React.FC<SignupProps> = ({
@@ -27,7 +28,8 @@ const Login: React.FC<SignupProps> = ({
   setPassword,
   setUserName,
   setBirth,
-  onChangeType
+  onChangeType,
+  insertUser
 }) => {
   return (
     <MainDiv>
@@ -45,6 +47,7 @@ const Login: React.FC<SignupProps> = ({
           setUserName={setUserName}
           setBirth={setBirth}
           onChangeType={onChangeType}
+          insertUser={insertUser}
         />
       )}
     </MainDiv>

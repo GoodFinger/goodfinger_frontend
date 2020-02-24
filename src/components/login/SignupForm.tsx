@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import "../../goodfinger.scss";
 import historyBack from "../../img/back.png";
 import emailIcon from "../../img/envelope.png";
@@ -20,6 +20,7 @@ interface SignupProps {
   setUserName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setBirth: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeType: (e: React.MouseEvent) => void;
+  insertUser: (e: React.MouseEvent) => void;
 }
 
 const SignupForm: React.FC<SignupProps> = ({
@@ -32,7 +33,8 @@ const SignupForm: React.FC<SignupProps> = ({
   setPassword,
   setUserName,
   setBirth,
-  onChangeType
+  onChangeType,
+  insertUser
 }) => {
   const isEmailForm = emailValidation(email);
   const isBirthForm = birthValidation(birth);
@@ -86,13 +88,39 @@ const SignupForm: React.FC<SignupProps> = ({
         ></FormInput>
       </div>
       <div>
-        <SignupIcon>Sign up</SignupIcon>
+        {!isBirthForm || !isEmailForm || !password || !userName ? (
+          <SignupIcon
+            isBirthForm={isBirthForm}
+            isEmailForm={isEmailForm}
+            password={password}
+            name={userName}
+          >
+            Sign up
+          </SignupIcon>
+        ) : (
+          <SignupIcon
+            isBirthForm={isBirthForm}
+            isEmailForm={isEmailForm}
+            password={password}
+            name={userName}
+            onClick={insertUser}
+          >
+            Sign up
+          </SignupIcon>
+        )}
       </div>
     </Layout>
   );
 };
 
-const SignupIcon = styled.span`
+interface buttonDisable {
+  isBirthForm: boolean;
+  isEmailForm: boolean;
+  password: string;
+  name: string;
+}
+
+const SignupIcon = styled.span<buttonDisable>`
   padding: 20px;
   display: inline-block;
   padding: 10px 30px;
@@ -100,9 +128,26 @@ const SignupIcon = styled.span`
   border-radius: 10px;
   margin-top: 16px;
   cursor: pointer;
+  ${({ isBirthForm, isEmailForm, password, name }) =>
+    (!isBirthForm || !isEmailForm || !password || !name) &&
+    css`
+      background-color: #d9d9d9;
+    `}
+
   &:hover {
-    background-color: #615d81;
-    color: white;
+    ${({ isBirthForm, isEmailForm, password, name }) => {
+      if (!isBirthForm || !isEmailForm || !password || !name) {
+        return css`
+          background-color: #d9d9d9;
+          color: black;
+        `;
+      } else {
+        return css`
+          background-color: #615d81;
+          color: white;
+        `;
+      }
+    }}
   }
 `;
 const BackDiv = styled.div`
