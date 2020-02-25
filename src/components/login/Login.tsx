@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import BackgroundImg from "../../img/bg5.jpg";
+import BackgroundImg from "img/bg5.jpg";
 import LoginForm from "./LoginForm";
 
 interface LoginProps {

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import emailIcon from "../../img/envelope.png";
-import passwordIcon from "../../img/closed-lock.png";
-import "../../goodfinger.scss";
 import { Link } from "react-router-dom";
+import emailIcon from "img/envelope.png";
+import passwordIcon from "img/closed-lock.png";
+import "goodfinger.scss";
 
 interface LoginProps {
   email: string;

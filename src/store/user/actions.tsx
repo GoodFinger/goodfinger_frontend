@@ -10,14 +10,21 @@ export const loginUser = ({ email, password }: { email: string; password: string
   password
 });
 
-export const signupUser = (
-  type: typeof SIGNUP_USER,
-  email: string,
-  password: string,
-  name: string,
-  birth: string,
-  isBoss: boolean
-) => ({
+export const signupUser = ({
+  type,
+  email,
+  password,
+  name,
+  birth,
+  isBoss
+}: {
+  type: typeof SIGNUP_USER;
+  email: string;
+  password: string;
+  name: string;
+  birth: string;
+  isBoss: boolean;
+}) => ({
   type,
   email,
   password,
@@ -37,6 +44,6 @@ export const submitUser = (
     const isBoss = userType === "boss" ? true : false;
     const type = SIGNUP_USER;
     console.log(type, email, password, name, birth, isBoss);
-    dispatch(signupUser(type, email, password, name, birth, isBoss));
+    dispatch(signupUser({ type, email, password, name, birth, isBoss }));
   };
 };

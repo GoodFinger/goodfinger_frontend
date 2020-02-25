@@ -1,13 +1,13 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import "../../goodfinger.scss";
-import historyBack from "../../img/back.png";
-import emailIcon from "../../img/envelope.png";
-import passwordIcon from "../../img/closed-lock.png";
-import userIcon from "../../img/user.png";
-import cakeIcon from "../../img/cake.png";
-import { emailValidation, birthValidation } from "../../lib/formValidation";
+import { emailValidation, birthValidation } from "lib/formValidation";
 import FormInput from "../common/FormInput";
+import "goodfinger.scss";
+import historyBack from "img/back.png";
+import emailIcon from "img/envelope.png";
+import passwordIcon from "img/closed-lock.png";
+import userIcon from "img/user.png";
+import cakeIcon from "img/cake.png";
 
 interface SignupProps {
   email: string;

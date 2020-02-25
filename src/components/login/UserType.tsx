@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import "../../goodfinger.scss";
-import boss from "../../img/man.png";
-import parttime from "../../img/curriculum-vitae.png";
+import "goodfinger.scss";
+import boss from "img/man.png";
+import parttime from "img/curriculum-vitae.png";
 
 interface UserTypeProps {
   userType: string;

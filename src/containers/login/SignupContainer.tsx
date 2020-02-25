@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Signup from "../../components/login/Signup";
-import useInput from "../../lib/useInput";
+import Signup from "components/login/Signup";
+import useInput from "lib/useInput";
 import { useDispatch } from "react-redux";
-import { submitUser } from "../../store/user/actions";
+import { submitUser } from "store/user/actions";
 
 interface User {}
 

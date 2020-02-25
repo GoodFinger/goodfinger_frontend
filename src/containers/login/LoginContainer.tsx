@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Login from "../../components/login/Login";
-import useInput from "../../lib/useInput";
+import Login from "components/login/Login";
+import useInput from "lib/useInput";
 import axios from "axios";
 
 interface User {}
