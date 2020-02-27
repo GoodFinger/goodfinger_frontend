@@ -20,6 +20,10 @@ const LoginForm: React.FC<LoginProps> = ({
   setPassword,
   getUserLogin
 }) => {
+  const onClick = (e: React.MouseEvent) => {
+    getUserLogin(e);
+  };
+
   return (
     <Layout className="loginform">
       <div className="logo content">Good Finger</div>
@@ -54,7 +58,7 @@ const LoginForm: React.FC<LoginProps> = ({
           </FormDiv>
         </div>
       </div>
-      <LoginBtn onClick={getUserLogin}>Login</LoginBtn>
+      <LoginBtn onClick={onClick}>Login</LoginBtn>
       <div className="signup">
         <div>You don't have account?</div>
         <SignUpLink>

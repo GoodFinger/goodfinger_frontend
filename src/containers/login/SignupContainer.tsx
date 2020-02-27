@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Signup from "components/login/Signup";
 import useInput from "lib/useInput";
 import { useDispatch } from "react-redux";
-import { submitUser } from "store/user/actions";
+import { signupUser } from "store/user/actions";
 
 interface User {}
 
@@ -26,7 +26,9 @@ const SignupContainer: React.FC<User> = () => {
 
   const insertUser = () => {
     try {
-      dispatch(submitUser(email, password, userName, birth, userType));
+      const name = userName;
+      const isBoss = userType === "boss" ? true : false;
+      dispatch(signupUser({ email, password, name, birth, isBoss }));
     } catch (err) {
       console.log(err);
     }
