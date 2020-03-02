@@ -1,4 +1,5 @@
-import { all, put, takeLatest } from "redux-saga/effects";
+import { all, put, takeLatest, getContext, call } from "redux-saga/effects";
+import { push } from "lib/historyUtils";
 import {
   LoginUserRequestAction,
   SignUpUserRequestAction,
@@ -24,6 +25,7 @@ function* signUp({ email, password, name, birth, isBoss }: SignUpUserRequestActi
       birth,
       isBoss
     });
+    yield call(push, "/companyList");
   } catch (e) {
     yield put({
       type: SIGNUP_USER_FAILURE
@@ -43,7 +45,9 @@ function* login({ email, password }: LoginUserRequestAction) {
       email,
       password
     });
+    yield call(push, "/companyList");
   } catch (e) {
+    console.log(e);
     yield put({
       type: LOGIN_USER_FAILURE
     });

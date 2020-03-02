@@ -7,7 +7,6 @@ import { User } from "./user/types";
 const rootReducer = combineReducers({
   user: userReducer
 });
-
 export default rootReducer;
 
 export type RootState = {

@@ -9,6 +9,7 @@ export interface User {
   introduction: string;
   partTimeHistory: Array<PartTime>;
   loading: boolean;
+  isLogging: boolean;
 }
 
 export interface PartTime {

@@ -7,16 +7,21 @@ import * as serviceWorker from "./serviceWorker";
 import createSagaMiddleware from "redux-saga";
 import { createLogger } from "redux-logger";
 import rootReducer, { rootSaga } from "./store";
+import { browserHistory } from "lib/historyUtils";
 import "./index.css";
+import { Router } from "react-router-dom";
 
-const logger = createLogger();
 const sagaMiddleware = createSagaMiddleware();
+const logger = createLogger();
+
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware, logger));
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router history={browserHistory}>
+      <App />
+    </Router>
   </Provider>,
   document.getElementById("root")
 );

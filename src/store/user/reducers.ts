@@ -19,7 +19,8 @@ const initialState: User = {
   isBoss: false,
   introduction: "",
   partTimeHistory: [],
-  loading: false
+  loading: false,
+  isLogging: false
 };
 
 const reducer = (state = initialState, action: UserActionTypes) => {
@@ -54,7 +55,8 @@ const reducer = (state = initialState, action: UserActionTypes) => {
         ...state,
         loading: false,
         email: action.email,
-        password: action.password
+        password: action.password,
+        isLogging: true
       };
     case LOGIN_USER_FAILURE:
       return {
