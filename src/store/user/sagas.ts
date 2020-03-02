@@ -25,7 +25,12 @@ function* signUp({ email, password, name, birth, isBoss }: SignUpUserRequestActi
       birth,
       isBoss
     });
-    yield call(push, "/companyList");
+
+    if (isBoss) {
+      yield call(push, "/companyList");
+    } else {
+      yield call(push, "/parttimeMain");
+    }
   } catch (e) {
     yield put({
       type: SIGNUP_USER_FAILURE
@@ -45,7 +50,14 @@ function* login({ email, password }: LoginUserRequestAction) {
       email,
       password
     });
-    yield call(push, "/companyList");
+
+    const isBoss = true;
+
+    if (isBoss) {
+      yield call(push, "/companyList");
+    } else {
+      yield call(push, "/parttimeMain");
+    }
   } catch (e) {
     console.log(e);
     yield put({
