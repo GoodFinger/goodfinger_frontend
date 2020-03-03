@@ -34,6 +34,7 @@ const MenuWrapper = styled.div`
 `;
 const MenuDiv = styled.div`
   display: inline-block;
+  cursor: pointer;
 `;
 
 const MenuCircle = styled.div`
