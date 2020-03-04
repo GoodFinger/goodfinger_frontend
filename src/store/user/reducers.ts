@@ -23,7 +23,7 @@ const initialState: User = {
   isLogging: false
 };
 
-const reducer = (state = initialState, action: UserActionTypes) => {
+const userReducer = (state = initialState, action: UserActionTypes) => {
   switch (action.type) {
     case SIGNUP_USER_REQUEST:
       return {
@@ -68,4 +68,4 @@ const reducer = (state = initialState, action: UserActionTypes) => {
   }
 };
 
-export default reducer;
+export default userReducer;

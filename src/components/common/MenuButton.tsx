@@ -54,6 +54,7 @@ const MenuCircle = styled.div`
 
 const MenuTitle = styled.div`
   text-align: center;
+  margin-top: 7px;
 `;
 
 export default MenuButton;

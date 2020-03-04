@@ -7,16 +7,18 @@ const BossFooter: React.FC<Footer> = () => {
     <FooterWrapper>
       <FooterTitle>Developers</FooterTitle>
       <table>
-        <tr>
-          <DeveloperTitle>Front Engineer</DeveloperTitle>
-          <td>유은정</td>
-        </tr>
-        <tr>
-          <DeveloperTitle>Back Engineer</DeveloperTitle>
-          <td>박예연</td>
-          <td>이효진</td>
-          <td>홍대표</td>
-        </tr>
+        <tbody>
+          <tr>
+            <DeveloperTitle>Front Engineer</DeveloperTitle>
+            <td>유은정</td>
+          </tr>
+          <tr>
+            <DeveloperTitle>Back Engineer</DeveloperTitle>
+            <td>박예연</td>
+            <td>이효진</td>
+            <td>홍대표</td>
+          </tr>
+        </tbody>
       </table>
       <ProjectName>@GoodFinger Project</ProjectName>
     </FooterWrapper>

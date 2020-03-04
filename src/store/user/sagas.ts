@@ -1,4 +1,4 @@
-import { all, put, takeLatest, getContext, call } from "redux-saga/effects";
+import { all, put, takeLatest, call } from "redux-saga/effects";
 import { push } from "lib/historyUtils";
 import {
   LoginUserRequestAction,

@@ -1,13 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import BossLayout from "components/boss/BossLayout";
 
 import LoginContainer from "containers/login/LoginContainer";
 import SignupContainer from "containers/login/SignupContainer";
 import PartTimeListContainer from "containers/boss/PartTimeListContainer";
-import CompanyListContainer from "containers/boss/CompanyListContainer";
-import CompanyAddContainer from "containers/boss/CompanyAddContainer";
+import CompanyListContainer from "containers/company/CompanyListContainer";
+import CompanyAddContainer from "containers/company/CompanyAddContainer";
 import PartTimeAddContainer from "containers/boss/PartTimeAddContainer";
 import "./App.css";
 
