@@ -21,16 +21,19 @@ export const getCompanyDetail = ({ email, id }: { email: string; id: string }) =
 export const insertComapny = ({
   email,
   name,
-  location
+  location,
+  imageList
 }: {
   email: string;
   name: string;
   location: string;
+  imageList: Array<File>;
 }) => ({
   type: INSERT_COMPANY_REQUEST,
   email,
   name,
-  location
+  location,
+  imageList
 });
 
 export const updateCompany = ({

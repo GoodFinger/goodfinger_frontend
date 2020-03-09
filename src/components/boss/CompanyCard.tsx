@@ -7,8 +7,8 @@ const CompanyCard = ({ company }: { company: Company }) => {
   return (
     <CardWrapper id={company.id}>
       <CompanyImage>
-        {company.picture.length !== 0 ? (
-          <img src={company.picture[0]} alt="company" />
+        {company.imageList.length !== 0 ? (
+          <img src={company.imageList[0]} alt="company" />
         ) : (
           <img src={cakeImage} alt="no_image" />
         )}

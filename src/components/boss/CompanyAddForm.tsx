@@ -1,12 +1,14 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface CompanyProps {
   name: string;
   location: string;
+  imageList: Array<File>;
   error: Array<Error>;
   setName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setLocation: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  addImageList: (e: React.ChangeEvent<HTMLInputElement>) => void;
   addCompany: () => void;
 }
 
@@ -21,10 +23,16 @@ const CompanyAddForm: React.FC<CompanyProps> = ({
   setName,
   location,
   setLocation,
-  error
+  error,
+  imageList,
+  addImageList
 }) => {
   const onAddCompany = () => {
     addCompany();
+  };
+
+  const onAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    addImageList(e);
   };
 
   return (
@@ -49,10 +57,24 @@ const CompanyAddForm: React.FC<CompanyProps> = ({
         </Error>
       </FormDiv>
       <FormDiv>
-        <ImageTitle>사진등록</ImageTitle>
-        <Image>사진1</Image>
-        <Image>사진2</Image>
-        <Image>사진3</Image>
+        <ImageTitle>
+          사진등록
+          <label id="uploadImageBtn" htmlFor="ex_file">
+            Upload
+          </label>
+          <input type="file" name="image" accept="image/*" id="ex_file" onChange={onAddImage} />
+        </ImageTitle>
+        {imageList.length > 0 ? (
+          imageList.map(image => (
+            <Image realImage={true} key={image.lastModified}>
+              <img src={URL.createObjectURL(image)} alt="company" />
+            </Image>
+          ))
+        ) : (
+          <>
+            <Image realImage={false}>이미지를 등록하세요</Image>
+          </>
+        )}
       </FormDiv>
       <FormDiv>
         <Button onClick={onAddCompany}>등록</Button>
@@ -94,14 +116,41 @@ const FormDiv = styled.div`
 
 const ImageTitle = styled.div`
   margin-bottom: 10px;
+
+  & #uploadImageBtn {
+    border: 1px solid #d9d9d9;
+    padding: 2px;
+    font-size: 12px;
+    margin-left: 15px;
+  }
+
+  & #ex_file {
+    display: none;
+  }
 `;
 
-const Image = styled.div`
+interface RealImage {
+  realImage: boolean;
+}
+const Image = styled.div<RealImage>`
   display: inline-block;
   width: 200px;
   height: 200px;
   border: 1px solid #d9d9d9;
   margin-right: 15px;
+  margin-bottom: 15px;
+  ${({ realImage }) =>
+    !realImage &&
+    css`
+      line-height: 200px;
+    `}
+  & img {
+    max-width: 200px;
+    max-height: 200px;
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const Button = styled.div`

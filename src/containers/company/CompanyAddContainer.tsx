@@ -17,15 +17,26 @@ const CompanyAddContainer: React.FC<Company> = () => {
   const [name, setName] = useInput("");
   const [location, setLocation] = useInput("");
   const [error, setError] = useState<Array<Error>>([]);
+  const [imageList, setImageList] = useState<Array<File>>([]);
   const dispatch = useDispatch();
 
   const addCompany = () => {
     const errorList: Array<Error> = validationCheck(name, location);
 
     if (errorList.length === 0) {
-      dispatch(insertComapny({ email, name, location }));
+      dispatch(insertComapny({ email, name, location, imageList }));
     } else {
       setError(errorList);
+      return;
+    }
+  };
+
+  const addImageList = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.files ? e.target.files[0] : null;
+
+    if (value) {
+      setImageList(imageList.concat(value));
+    } else {
       return;
     }
   };
@@ -51,6 +62,8 @@ const CompanyAddContainer: React.FC<Company> = () => {
         setName={setName}
         location={location}
         setLocation={setLocation}
+        imageList={imageList}
+        addImageList={addImageList}
         error={error}
       ></CompanyAddForm>
     </CompanyAddWrapper>

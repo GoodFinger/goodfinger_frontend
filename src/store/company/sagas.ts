@@ -27,7 +27,7 @@ function* companyList({ email }: ListCompanyRequestAction) {
   try {
     //call companyList
     const companyList: Array<Company> = [
-      { id: "test", name: "test1", location: "서울시 강남구 신사동 123-4", picture: [] }
+      { id: "test", name: "test1", location: "서울시 강남구 신사동 123-4", imageList: [] }
     ];
 
     //when companyList Success
@@ -45,7 +45,7 @@ function* companyList({ email }: ListCompanyRequestAction) {
 function* companyDetail({ id }: DetailCompanyRequestAction) {
   try {
     //call company detail
-    const selCompany: Company = { id: "", name: "", location: "", picture: [] };
+    const selCompany: Company = { id: "", name: "", location: "", imageList: [] };
 
     //when company detail call success
     yield put({
@@ -59,10 +59,10 @@ function* companyDetail({ id }: DetailCompanyRequestAction) {
   }
 }
 
-function* companyInsert({ email, name, location, picture }: InsertCompanyRequestAction) {
+function* companyInsert({ email, name, location, imageList }: InsertCompanyRequestAction) {
   try {
     //call insert company
-
+    console.log(email, name, location, imageList);
     //when success
     //1. insert company success
     yield put({
@@ -77,7 +77,7 @@ function* companyInsert({ email, name, location, picture }: InsertCompanyRequest
   }
 }
 
-function* companyUpdate({ email, id, name, location, picture }: UpdateCompanyRequestAction) {
+function* companyUpdate({ email, id, name, location, imageList }: UpdateCompanyRequestAction) {
   try {
     //call update company
 

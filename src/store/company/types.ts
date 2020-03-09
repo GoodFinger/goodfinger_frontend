@@ -9,7 +9,7 @@ export interface Company {
   id: string;
   name: string;
   location: string;
-  picture: Array<string>;
+  imageList: Array<string>;
 }
 
 /** define action */
@@ -80,7 +80,7 @@ export interface InsertCompanyRequestAction {
   email: string;
   name: string;
   location: string;
-  picture: Array<string>;
+  imageList: Array<string>;
 }
 
 export interface InsertCompanySuccessAction {
@@ -89,7 +89,7 @@ export interface InsertCompanySuccessAction {
   email: string;
   name: string;
   location: string;
-  picture: Array<string>;
+  imageList: Array<string>;
 }
 
 export interface InsertCompanyFailureAction {
@@ -103,7 +103,7 @@ export interface UpdateCompanyRequestAction {
   id: string;
   name: string;
   location: string;
-  picture: Array<string>;
+  imageList: Array<string>;
   loading: boolean;
 }
 
@@ -113,7 +113,7 @@ export interface UpdateCompanySuccessAction {
   id: string;
   name: string;
   location: string;
-  picture: Array<string>;
+  imageList: Array<string>;
   loading: boolean;
 }
 

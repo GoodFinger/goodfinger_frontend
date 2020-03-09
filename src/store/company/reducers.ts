@@ -26,7 +26,7 @@ const initialState: CompanyList = {
     id: "",
     name: "",
     location: "",
-    picture: []
+    imageList: []
   }
 };
 
