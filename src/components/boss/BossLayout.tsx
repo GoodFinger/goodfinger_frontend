@@ -25,7 +25,7 @@ const BossLayout = ({ component: Component, ...rest }: IProps) => {
 };
 
 const LayoutWrapper = styled.div`
-  postion: relative;
+  position: relative;
 `;
 
 export default BossLayout;

@@ -29,7 +29,7 @@ const FooterWrapper = styled.div`
   background-color: #534871;
   color: #ffffff;
   padding: 20px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
@@ -41,12 +41,12 @@ const FooterTitle = styled.div`
 `;
 
 const DeveloperTitle = styled.td`
-  padding: 0 20px;
+  padding: 0 10px;
 `;
 
 const ProjectName = styled.div`
   float: right;
-  bottom: 20px;
+  bottom: 5px;
   position: absolute;
   right: 20px;
   font-style: italic;

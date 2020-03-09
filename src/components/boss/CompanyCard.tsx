@@ -25,11 +25,12 @@ const CompanyCard = ({ company }: { company: Company }) => {
 };
 
 const CardWrapper = styled.div`
-  border: 1px solid #d9d9d9;
+  border: 2px solid #c5bdda;
   border-radius: 10px;
-  width: 363px;
+  width: 86%;
   margin: auto;
   padding: 10px;
+  max-width: 353px;
 `;
 
 const CompanyImage = styled.div`
@@ -45,7 +46,7 @@ const CompanyImage = styled.div`
 
 const CompanyInfo = styled.div`
   display: inline-block;
-  margin-left: 20px;
+  margin-left: 5%;
   vertical-align: sub;
   margin-bottom: 25px;
 `;
