@@ -11,6 +11,7 @@ const SignupContainer: React.FC<User> = () => {
   const [password, setPassword] = useInput("");
   const [userName, setUserName] = useInput("");
   const [birth, setBirth] = useInput("");
+  const [sex, setSex] = useState("F");
   const [userType, setUserType] = useState("");
   const dispatch = useDispatch();
 
@@ -24,11 +25,17 @@ const SignupContainer: React.FC<User> = () => {
     }
   };
 
+  const onChangeSex = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+
+    setSex(value);
+  };
+
   const insertUser = () => {
     try {
       const name = userName;
       const isBoss = userType === "boss" ? true : false;
-      dispatch(signupUser({ email, password, name, birth, isBoss }));
+      dispatch(signupUser({ email, password, name, birth, isBoss, sex }));
     } catch (err) {
       console.log(err);
     }
@@ -41,12 +48,14 @@ const SignupContainer: React.FC<User> = () => {
       userName={userName}
       birth={birth}
       userType={userType}
+      sex={sex}
       setEmail={setEmail}
       setPassword={setPassword}
       setUserName={setUserName}
       setBirth={setBirth}
       onChangeType={onChangeType}
       insertUser={insertUser}
+      onChangeSex={onChangeSex}
     ></Signup>
   );
 };

@@ -11,11 +11,11 @@ import {
   SIGNUP_USER_FAILURE
 } from "./types";
 
-function* signUp({ email, password, name, birth, isBoss }: SignUpUserRequestAction) {
+function* signUp({ email, password, name, birth, isBoss, sex }: SignUpUserRequestAction) {
   //yield put() -- start loading
   try {
     //signup start code
-    console.log(email, password, name, birth, isBoss);
+    console.log(email, password, name, birth, isBoss, sex);
     //when signup success
     yield put({
       type: SIGNUP_USER_SUCCESS,
@@ -23,6 +23,7 @@ function* signUp({ email, password, name, birth, isBoss }: SignUpUserRequestActi
       password,
       name,
       birth,
+      sex,
       isBoss
     });
 

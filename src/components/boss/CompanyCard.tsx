@@ -14,12 +14,13 @@ const CompanyCard = ({ company }: { company: Company }) => {
         )}
       </CompanyImage>
       <CompanyDelete>삭제</CompanyDelete>
+      <CompanyDelete>수정</CompanyDelete>
       <CompanyInfo>
         <CompanyName>{company.name}</CompanyName>
         <CompanyLocation>{company.location}</CompanyLocation>
       </CompanyInfo>
-      <CompanyButton>근무지 사진 등록하기</CompanyButton>
-      <CompanyButton>사업자 인증하기</CompanyButton>
+      {/* <CompanyButton>근무지 사진 등록하기</CompanyButton> */}
+      {/* <CompanyButton>사업자 인증하기</CompanyButton> */}
     </CardWrapper>
   );
 };
@@ -60,19 +61,20 @@ const CompanyDelete = styled.div`
   float: right;
   color: gray;
   cursor: pointer;
+  margin-left: 10px;
 `;
 
 const CompanyLocation = styled.div`
   margin-top: 10px;
 `;
 
-const CompanyButton = styled.div`
-  padding: 10px;
-  text-align: center;
-  width: 80%;
-  margin: auto;
-  border-top: 1px solid #d9d9d9;
-  cursor: pointer;
-`;
+// const CompanyButton = styled.div`
+//   padding: 10px;
+//   text-align: center;
+//   width: 80%;
+//   margin: auto;
+//   border-top: 1px solid #d9d9d9;
+//   cursor: pointer;
+// `;
 
 export default CompanyCard;

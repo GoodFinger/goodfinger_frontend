@@ -10,10 +10,12 @@ interface SignupProps {
   userName: string;
   birth: string;
   userType: string;
+  sex: string;
   setEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setUserName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setBirth: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeSex: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeType: (e: React.MouseEvent) => void;
   insertUser: (e: React.MouseEvent) => void;
 }
@@ -24,12 +26,14 @@ const Login: React.FC<SignupProps> = ({
   userName,
   birth,
   userType,
+  sex,
   setEmail,
   setPassword,
   setUserName,
   setBirth,
   onChangeType,
-  insertUser
+  insertUser,
+  onChangeSex
 }) => {
   return (
     <MainDiv>
@@ -48,6 +52,8 @@ const Login: React.FC<SignupProps> = ({
           setBirth={setBirth}
           onChangeType={onChangeType}
           insertUser={insertUser}
+          sex={sex}
+          onChangeSex={onChangeSex}
         />
       )}
     </MainDiv>

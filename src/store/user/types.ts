@@ -5,6 +5,7 @@ export interface User {
   name: string;
   image: string;
   birth: string;
+  sex: string;
   isBoss: boolean;
   introduction: string;
   partTimeHistory: Array<PartTime>;
@@ -56,6 +57,7 @@ export interface SignUpUserRequestAction {
   name: string;
   birth: string;
   isBoss: boolean;
+  sex: string;
   loading: boolean;
 }
 
@@ -65,6 +67,7 @@ export interface SignUpUserSuccessAction {
   password: string;
   name: string;
   birth: string;
+  sex: string;
   isBoss: boolean;
   loading: boolean;
 }

@@ -16,6 +16,7 @@ const initialState: User = {
   name: "",
   image: "",
   birth: "",
+  sex: "F",
   isBoss: false,
   introduction: "",
   partTimeHistory: [],

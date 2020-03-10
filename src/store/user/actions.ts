@@ -13,18 +13,21 @@ export const signupUser = ({
   password,
   name,
   birth,
-  isBoss
+  isBoss,
+  sex
 }: {
   email: string;
   password: string;
   name: string;
   birth: string;
   isBoss: boolean;
+  sex: string;
 }) => ({
   type: SIGNUP_USER_REQUEST,
   email,
   password,
   name,
   birth,
-  isBoss
+  isBoss,
+  sex
 });

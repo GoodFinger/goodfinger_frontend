@@ -8,6 +8,7 @@ import emailIcon from "img/envelope.png";
 import passwordIcon from "img/closed-lock.png";
 import userIcon from "img/user.png";
 import cakeIcon from "img/cake.png";
+import sexIcon from "img/female_man.png";
 
 interface SignupProps {
   email: string;
@@ -15,10 +16,12 @@ interface SignupProps {
   userName: string;
   birth: string;
   userType: string;
+  sex: string;
   setEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setUserName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setBirth: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeSex: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeType: (e: React.MouseEvent) => void;
   insertUser: (e: React.MouseEvent) => void;
 }
@@ -28,13 +31,14 @@ const SignupForm: React.FC<SignupProps> = ({
   password,
   userName,
   birth,
-  userType,
+  sex,
   setEmail,
   setPassword,
   setUserName,
   setBirth,
   onChangeType,
-  insertUser
+  insertUser,
+  onChangeSex
 }) => {
   const isEmailForm = emailValidation(email);
   const isBirthForm = birthValidation(birth);
@@ -86,6 +90,17 @@ const SignupForm: React.FC<SignupProps> = ({
           iconSrc={cakeIcon}
           alertMessage="형식(1999-01-03)이 맞지 않습니다."
         ></FormInput>
+        <div>
+          <RadioTitle>
+            <img src={sexIcon} alt="female and male" />
+          </RadioTitle>
+          <InputArea>
+            <input type="radio" name="sex" value="F" onChange={onChangeSex} checked={sex === "F"} />
+            <label htmlFor="F">여성</label>
+            <Radio type="radio" name="sex" value="M" onChange={onChangeSex} checked={sex === "M"} />
+            <label htmlFor="M">남성</label>
+          </InputArea>
+        </div>
       </div>
       <div>
         {!isBirthForm || !isEmailForm || !password || !userName ? (
@@ -123,7 +138,7 @@ interface buttonDisable {
 const SignupIcon = styled.span<buttonDisable>`
   padding: 20px;
   display: inline-block;
-  padding: 10px 30px;
+  padding: 4px 20px;
   border: 1px solid #8f908f;
   border-radius: 10px;
   margin-top: 16px;
@@ -175,4 +190,21 @@ const Layout = styled.div`
   min-width: 250px;
 `;
 
+const RadioTitle = styled.span`
+  & img {
+    width: 24px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+`;
+
+const Radio = styled.input`
+  margin-left: 20px;
+`;
+
+const InputArea = styled.div`
+  display: inline-block;
+  width: 61%;
+  text-align: center;
+`;
 export default SignupForm;
