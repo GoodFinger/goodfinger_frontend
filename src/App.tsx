@@ -8,6 +8,7 @@ import SignupContainer from "containers/login/SignupContainer";
 import PartTimeListContainer from "containers/boss/PartTimeListContainer";
 import CompanyListContainer from "containers/company/CompanyListContainer";
 import CompanyAddContainer from "containers/company/CompanyAddContainer";
+import CompanyUpdateContainer from "containers/company/CompanyUpdateContainer";
 import PartTimeAddContainer from "containers/boss/PartTimeAddContainer";
 import "./App.css";
 
@@ -18,6 +19,7 @@ const App: React.FC = () => {
       <Route exact path="/signup" component={SignupContainer} />
       <BossLayout exact path="/companyList" component={CompanyListContainer} />
       <BossLayout exact path="/companyAdd" component={CompanyAddContainer} />
+      <BossLayout exact path="/companyUpdate/:id" component={CompanyUpdateContainer} />
       <BossLayout exact path="/parttimeList" component={PartTimeListContainer} />
       <BossLayout exact path="/parttimeAdd" component={PartTimeAddContainer} />
     </>

@@ -3,18 +3,29 @@ import styled from "styled-components";
 import { Company } from "store/company/types";
 import cakeImage from "img/cake.png";
 
-const CompanyCard = ({ company }: { company: Company }) => {
+interface CompanyAction {
+  onCompanyDelete: (e: React.MouseEvent) => void;
+  onCompanyUpdate: (e: React.MouseEvent) => void;
+  company: Company;
+}
+
+const CompanyCard: React.FC<CompanyAction> = ({ company, onCompanyDelete, onCompanyUpdate }) => {
   return (
     <CardWrapper id={company.id}>
       <CompanyImage>
         {company.imageList.length !== 0 ? (
-          <img src={company.imageList[0]} alt="company" />
+          // <img src={company.imageList[0]} alt="company" />
+          <img src={cakeImage} alt="no_image" />
         ) : (
           <img src={cakeImage} alt="no_image" />
         )}
       </CompanyImage>
-      <CompanyDelete>삭제</CompanyDelete>
-      <CompanyDelete>수정</CompanyDelete>
+      <CompanyDelete data-companyid={company.id} onClick={onCompanyDelete}>
+        삭제
+      </CompanyDelete>
+      <CompanyDelete data-companyid={company.id} onClick={onCompanyUpdate}>
+        수정
+      </CompanyDelete>
       <CompanyInfo>
         <CompanyName>{company.name}</CompanyName>
         <CompanyLocation>{company.location}</CompanyLocation>

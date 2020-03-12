@@ -9,7 +9,7 @@ export interface Company {
   id: string;
   name: string;
   location: string;
-  imageList: Array<string>;
+  imageList: Array<File>;
 }
 
 /** define action */

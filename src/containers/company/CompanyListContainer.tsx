@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
-import { getCompanyList } from "store/company/actions";
+import { getCompanyList, deleteCompany } from "store/company/actions";
 import { CompanyList } from "store/company/types";
 import CompanyCard from "components/boss/CompanyCard";
 import { push } from "lib/historyUtils";
@@ -21,13 +21,30 @@ const CompanyListContainer: React.FC<Company> = () => {
     push("/companyAdd");
   };
 
+  const onCompanyDelete = (e: React.MouseEvent) => {
+    const target = e.currentTarget;
+    const id = target.getAttribute("data-companyid") || "";
+
+    const response = window.confirm("정말로 삭제하시겠습니까?");
+
+    if (response) {
+      dispatch(deleteCompany({ email, id }));
+    }
+  };
+
+  const onCompanyUpdate = (e: React.MouseEvent) => {
+    const target = e.currentTarget;
+    const id = target.getAttribute("data-companyId") || "";
+
+    push("/companyUpdate/" + id);
+  };
+
   useEffect(() => {
     setLoading(true);
     dispatch(getCompanyList({ email }));
     setLoading(false);
     return () => {};
   }, [dispatch, email]);
-  console.log(companyList);
 
   return (
     <div>
@@ -38,7 +55,12 @@ const CompanyListContainer: React.FC<Company> = () => {
             <AddBtn onClick={onCompanyAdd}>근무지 추가</AddBtn>
           </div>
           {companyList.map(company => (
-            <CompanyCard company={company} key={company.id} />
+            <CompanyCard
+              company={company}
+              key={company.id}
+              onCompanyDelete={onCompanyDelete}
+              onCompanyUpdate={onCompanyUpdate}
+            />
           ))}
         </CompanyListWrapper>
       )}

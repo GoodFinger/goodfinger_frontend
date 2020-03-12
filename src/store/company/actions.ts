@@ -40,18 +40,21 @@ export const updateCompany = ({
   email,
   id,
   name,
-  location
+  location,
+  imageList
 }: {
   email: string;
   id: string;
   name: string;
   location: string;
+  imageList: Array<File>;
 }) => ({
   type: UPDATE_COMPANY_REQUEST,
   email,
   id,
   name,
-  location
+  location,
+  imageList
 });
 
 export const deleteCompany = ({ email, id }: { email: string; id: string }) => ({
