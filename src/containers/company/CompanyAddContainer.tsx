@@ -41,6 +41,12 @@ const CompanyAddContainer: React.FC<Company> = () => {
     }
   };
 
+  const deleteImageList = (e: React.MouseEvent) => {
+    const idx = e.currentTarget.getAttribute("data-index");
+
+    setImageList(imageList.filter((image, index) => index === Number(idx)));
+  };
+
   const validationCheck = (name: string, location: string) => {
     const errorList: Array<Error> = [];
     if (!name) {
@@ -64,6 +70,7 @@ const CompanyAddContainer: React.FC<Company> = () => {
         setLocation={setLocation}
         imageList={imageList}
         addImageList={addImageList}
+        deleteImageList={deleteImageList}
         error={error}
       ></CompanyAddForm>
     </CompanyAddWrapper>

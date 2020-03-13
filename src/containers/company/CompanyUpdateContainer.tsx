@@ -27,7 +27,6 @@ const CompanyUpdateContainer: React.SFC<RouteComponentProps<MatchParams>> = ({ m
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  console.log(name, location);
   useEffect(() => {
     setLoading(true);
     dispatch(getCompanyDetail({ email, id }));
@@ -56,6 +55,12 @@ const CompanyUpdateContainer: React.SFC<RouteComponentProps<MatchParams>> = ({ m
     }
   };
 
+  const deleteImageList = (e: React.MouseEvent) => {
+    const idx = e.currentTarget.getAttribute("data-index");
+
+    setImageList(imageList.filter((image, index) => index !== Number(idx)));
+  };
+
   const validationCheck = (name: string, location: string) => {
     const errorList: Array<Error> = [];
     if (!name) {
@@ -81,6 +86,7 @@ const CompanyUpdateContainer: React.SFC<RouteComponentProps<MatchParams>> = ({ m
           setLocation={setLocation}
           imageList={imageList}
           addImageList={addImageList}
+          deleteImageList={deleteImageList}
           error={error}
         ></CompanyAddForm>
       )}

@@ -9,6 +9,7 @@ interface CompanyProps {
   setName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setLocation: (e: React.ChangeEvent<HTMLInputElement>) => void;
   addImageList: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  deleteImageList: (e: React.MouseEvent) => void;
   addCompany: () => void;
 }
 
@@ -25,7 +26,8 @@ const CompanyAddForm: React.FC<CompanyProps> = ({
   setLocation,
   error,
   imageList,
-  addImageList
+  addImageList,
+  deleteImageList
 }) => {
   const onAddCompany = () => {
     addCompany();
@@ -33,6 +35,10 @@ const CompanyAddForm: React.FC<CompanyProps> = ({
 
   const onAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     addImageList(e);
+  };
+
+  const onDeleteImage = (e: React.MouseEvent) => {
+    deleteImageList(e);
   };
 
   return (
@@ -65,9 +71,12 @@ const CompanyAddForm: React.FC<CompanyProps> = ({
           <input type="file" name="image" accept="image/*" id="ex_file" onChange={onAddImage} />
         </ImageTitle>
         {imageList.length > 0 ? (
-          imageList.map(image => (
-            <Image realImage={true} key={image.lastModified}>
+          imageList.map((image, idx) => (
+            <Image realImage={true} key={image.lastModified + "_" + idx}>
               <img src={URL.createObjectURL(image)} alt="company" />
+              <DeleteBtn onClick={onDeleteImage} data-index={idx}>
+                X
+              </DeleteBtn>
             </Image>
           ))
         ) : (
@@ -139,6 +148,7 @@ const Image = styled.div<RealImage>`
   border: 1px solid #d9d9d9;
   margin-right: 15px;
   margin-bottom: 15px;
+  position: relative;
   ${({ realImage }) =>
     !realImage &&
     css`
@@ -151,6 +161,17 @@ const Image = styled.div<RealImage>`
     width: 100%;
     height: 100%;
   }
+`;
+
+const DeleteBtn = styled.span`
+  padding: 1px 5px;
+  border: 1px solid gray;
+  border-radius: 25px;
+  background-color: #d6d6d6;
+  position: absolute;
+  right: -19px;
+  top: -11px;
+  cursor: pointer;
 `;
 
 const Button = styled.div`
