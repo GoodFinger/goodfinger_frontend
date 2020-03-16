@@ -21,9 +21,9 @@ const CompanyListContainer: React.FC<Company> = () => {
     push("/companyAdd");
   };
 
-  const onCompanyDelete = (e: React.MouseEvent) => {
+  const onCompanyDelete = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.currentTarget;
-    const id = target.getAttribute("data-companyid") || "";
+    const id = target.dataset.companyid || "";
 
     const response = window.confirm("정말로 삭제하시겠습니까?");
 
@@ -32,9 +32,9 @@ const CompanyListContainer: React.FC<Company> = () => {
     }
   };
 
-  const onCompanyUpdate = (e: React.MouseEvent) => {
+  const onCompanyUpdate = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.currentTarget;
-    const id = target.getAttribute("data-companyId") || "";
+    const id = target.dataset.companyid || "";
 
     push("/companyUpdate/" + id);
   };

@@ -55,8 +55,8 @@ const CompanyUpdateContainer: React.SFC<RouteComponentProps<MatchParams>> = ({ m
     }
   };
 
-  const deleteImageList = (e: React.MouseEvent) => {
-    const idx = e.currentTarget.getAttribute("data-index");
+  const deleteImageList = (e: React.MouseEvent<HTMLElement>) => {
+    const idx = e.currentTarget.dataset.index;
 
     setImageList(imageList.filter((image, index) => index !== Number(idx)));
   };

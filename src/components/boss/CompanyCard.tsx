@@ -4,8 +4,8 @@ import { Company } from "store/company/types";
 import cakeImage from "img/cake.png";
 
 interface CompanyAction {
-  onCompanyDelete: (e: React.MouseEvent) => void;
-  onCompanyUpdate: (e: React.MouseEvent) => void;
+  onCompanyDelete: (e: React.MouseEvent<HTMLElement>) => void;
+  onCompanyUpdate: (e: React.MouseEvent<HTMLElement>) => void;
   company: Company;
 }
 

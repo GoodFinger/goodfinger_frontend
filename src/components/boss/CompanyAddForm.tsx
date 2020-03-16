@@ -9,7 +9,7 @@ interface CompanyProps {
   setName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setLocation: (e: React.ChangeEvent<HTMLInputElement>) => void;
   addImageList: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  deleteImageList: (e: React.MouseEvent) => void;
+  deleteImageList: (e: React.MouseEvent<HTMLElement>) => void;
   addCompany: () => void;
 }
 
@@ -37,7 +37,7 @@ const CompanyAddForm: React.FC<CompanyProps> = ({
     addImageList(e);
   };
 
-  const onDeleteImage = (e: React.MouseEvent) => {
+  const onDeleteImage = (e: React.MouseEvent<HTMLElement>) => {
     deleteImageList(e);
   };
 
