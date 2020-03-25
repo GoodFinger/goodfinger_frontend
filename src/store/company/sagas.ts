@@ -1,5 +1,6 @@
 import { all, put, takeLatest, call } from "redux-saga/effects";
 import { push } from "lib/historyUtils";
+import axios from "axios";
 import {
   ListCompanyRequestAction,
   LIST_COMPANY_REQUEST,
@@ -30,6 +31,10 @@ function* companyList({ email }: ListCompanyRequestAction) {
       { id: "test", name: "test1", location: "서울시 강남구 신사동 123-4", imageList: [] }
     ];
 
+    // axios.get("http://54.180.102.186/yy").then(response => {
+    //   console.log(response.data);
+    //   console.log(JSON.parse(response.data));
+    // });
     //when companyList Success
     yield put({
       type: LIST_COMPANY_SUCCESS,
