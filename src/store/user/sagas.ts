@@ -10,11 +10,28 @@ import {
   SIGNUP_USER_SUCCESS,
   SIGNUP_USER_FAILURE
 } from "./types";
+import axios from "axios";
 
+const register = async (data: string) => {
+  const response = await axios.post("http://54.180.102.186:8080/users/signUp", JSON.parse(data));
+  console.log(response);
+
+  return response;
+};
 function* signUp({ email, password, name, birth, isBoss, sex }: SignUpUserRequestAction) {
   //yield put() -- start loading
   try {
     //signup start code
+    const data = {
+      email,
+      password,
+      name,
+      birth,
+      isBoss,
+      sex
+    };
+
+    yield call(register, JSON.stringify(data));
     console.log(email, password, name, birth, isBoss, sex);
     //when signup success
     yield put({

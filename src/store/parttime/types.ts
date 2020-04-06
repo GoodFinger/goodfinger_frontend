@@ -12,7 +12,8 @@ export interface PartTime {
   flag: string; // is parttime announcement finished?
   createDate: string;
   company: string; //company id? or company name?
-  category: string;
+  imageList: Array<string>;
+  category: Array<string>;
   locationCity: string;
   locatinDistrict: string;
   recruitment: number;

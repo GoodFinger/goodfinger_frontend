@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { ParttimeList } from "store/parttime/types";
 import { RootState } from "store";
 import { getPartTimeList } from "store/parttime/actions";
+import PartTimeCard from "components/parttime/PartTimeCard";
 
 interface PartTime {
   partTimeList: Array<ParttimeList>;
@@ -25,14 +27,18 @@ const PartTimeListContainer: React.FC<PartTime> = () => {
     <div>
       {loading && <div>now Loading</div>}
       {!loading && (
-        <div>
+        <Wrapper>
           {partTimeList.map(partTime => (
-            <div key={partTime.announcementId}>{partTime.announcementId}</div>
+            <PartTimeCard key={partTime.announcementId} partTime={partTime} />
           ))}
-        </div>
+        </Wrapper>
       )}
     </div>
   );
 };
 
+const Wrapper = styled.div`
+  margin-top: 20px;
+  padding: 0 20px 130px 20px;
+`;
 export default PartTimeListContainer;

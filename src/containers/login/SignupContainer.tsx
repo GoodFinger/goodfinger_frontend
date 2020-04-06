@@ -27,7 +27,6 @@ const SignupContainer: React.FC<User> = () => {
 
   const onChangeSex = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
-
     setSex(value);
   };
 
