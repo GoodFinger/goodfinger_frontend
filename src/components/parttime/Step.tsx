@@ -27,7 +27,7 @@ interface StepProps {
 const Circle = styled.div<StepProps>`
   padding: 5px 10px;
   display: inline-block;
-  border: ${({ now, value }) => (now === value ? `2px solid purple` : `2px solid #d9d9d9`)};
+  border: ${({ now, value }) => (now === value ? `2px solid purple` : `2px solid #d9d9d5`)};
   border-radius: 25px;
 `;
 
