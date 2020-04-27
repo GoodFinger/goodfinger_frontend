@@ -76,6 +76,7 @@ export interface DetailCompanyFailureAction {
 
 export interface InsertCompanyRequestAction {
   type: typeof INSERT_COMPANY_REQUEST;
+  mastername: string;
   loading: boolean;
   email: string;
   name: string;

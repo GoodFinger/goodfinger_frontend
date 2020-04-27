@@ -8,16 +8,10 @@ import {
   LOGIN_USER_FAILURE,
   SIGNUP_USER_REQUEST,
   SIGNUP_USER_SUCCESS,
-  SIGNUP_USER_FAILURE
+  SIGNUP_USER_FAILURE,
 } from "./types";
-import axios from "axios";
+import { register } from "lib/api/api";
 
-const register = async (data: string) => {
-  const response = await axios.post("http://54.180.102.186:8080/users/signUp", JSON.parse(data));
-  console.log(response);
-
-  return response;
-};
 function* signUp({ email, password, name, birth, isBoss, sex }: SignUpUserRequestAction) {
   //yield put() -- start loading
   try {
@@ -28,11 +22,12 @@ function* signUp({ email, password, name, birth, isBoss, sex }: SignUpUserReques
       name,
       birth,
       isBoss,
-      sex
+      sex,
     };
-
-    yield call(register, JSON.stringify(data));
     console.log(email, password, name, birth, isBoss, sex);
+
+    const reponse = yield call(register, data);
+
     //when signup success
     yield put({
       type: SIGNUP_USER_SUCCESS,
@@ -41,7 +36,7 @@ function* signUp({ email, password, name, birth, isBoss, sex }: SignUpUserReques
       name,
       birth,
       sex,
-      isBoss
+      isBoss,
     });
 
     if (isBoss) {
@@ -51,7 +46,7 @@ function* signUp({ email, password, name, birth, isBoss, sex }: SignUpUserReques
     }
   } catch (e) {
     yield put({
-      type: SIGNUP_USER_FAILURE
+      type: SIGNUP_USER_FAILURE,
     });
   }
 }
@@ -66,7 +61,7 @@ function* login({ email, password }: LoginUserRequestAction) {
     yield put({
       type: LOGIN_USER_SUCCESS,
       email,
-      password
+      password,
     });
 
     const isBoss = true;
@@ -79,7 +74,7 @@ function* login({ email, password }: LoginUserRequestAction) {
   } catch (e) {
     console.log(e);
     yield put({
-      type: LOGIN_USER_FAILURE
+      type: LOGIN_USER_FAILURE,
     });
   }
 }

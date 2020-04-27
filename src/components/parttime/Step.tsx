@@ -7,7 +7,7 @@ interface StepInfo {
   title: string;
 }
 
-const Step: React.FC<StepInfo> = ({ value, now, title }) => {
+function Step({ value, now, title }: StepInfo) {
   return (
     <>
       <Circle now={now} value={value}>
@@ -18,7 +18,7 @@ const Step: React.FC<StepInfo> = ({ value, now, title }) => {
       </Title>
     </>
   );
-};
+}
 
 interface StepProps {
   now: number;

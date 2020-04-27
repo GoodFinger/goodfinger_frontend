@@ -14,6 +14,7 @@ interface Error {
 
 const CompanyAddContainer: React.FC<Company> = () => {
   const { email } = useSelector((state: RootState) => state.user);
+  const mastername = useSelector((state: RootState) => state.user.name);
   const [name, setName] = useInput("");
   const [location, setLocation] = useInput("");
   const [error, setError] = useState<Array<Error>>([]);
@@ -24,7 +25,7 @@ const CompanyAddContainer: React.FC<Company> = () => {
     const errorList: Array<Error> = validationCheck(name, location);
 
     if (errorList.length === 0) {
-      dispatch(insertComapny({ email, name, location, imageList }));
+      dispatch(insertComapny({ mastername, email, name, location, imageList }));
     } else {
       setError(errorList);
       return;

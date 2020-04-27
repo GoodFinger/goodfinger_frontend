@@ -4,36 +4,39 @@ import {
   DETAIL_COMPANY_REQUEST,
   INSERT_COMPANY_REQUEST,
   DELETE_COMPANY_REQUEST,
-  UPDATE_COMPANY_REQUEST
+  UPDATE_COMPANY_REQUEST,
 } from "./types";
 
 export const getCompanyList = ({ email }: { email: string }) => ({
   type: LIST_COMPANY_REQUEST,
-  email
+  email,
 });
 
 export const getCompanyDetail = ({ email, id }: { email: string; id: string }) => ({
   type: DETAIL_COMPANY_REQUEST,
   email,
-  id
+  id,
 });
 
 export const insertComapny = ({
+  mastername,
   email,
   name,
   location,
-  imageList
+  imageList,
 }: {
+  mastername: string;
   email: string;
   name: string;
   location: string;
   imageList: Array<File>;
 }) => ({
   type: INSERT_COMPANY_REQUEST,
+  mastername,
   email,
   name,
   location,
-  imageList
+  imageList,
 });
 
 export const updateCompany = ({
@@ -41,7 +44,7 @@ export const updateCompany = ({
   id,
   name,
   location,
-  imageList
+  imageList,
 }: {
   email: string;
   id: string;
@@ -54,11 +57,11 @@ export const updateCompany = ({
   id,
   name,
   location,
-  imageList
+  imageList,
 });
 
 export const deleteCompany = ({ email, id }: { email: string; id: string }) => ({
   type: DELETE_COMPANY_REQUEST,
   email,
-  id
+  id,
 });

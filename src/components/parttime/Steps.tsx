@@ -6,7 +6,7 @@ interface StepInfo {
   step: number;
 }
 
-const Steps: React.FC<StepInfo> = ({ step }) => {
+function Steps({ step }: StepInfo) {
   const stepArr = [
     { value: 1, title: "공고등록" },
     { value: 2, title: "모집조건" },
@@ -22,7 +22,7 @@ const Steps: React.FC<StepInfo> = ({ step }) => {
       ))}
     </Wrapper>
   );
-};
+}
 
 const Wrapper = styled.div`
   text-align: center;

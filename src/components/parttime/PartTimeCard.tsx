@@ -6,7 +6,7 @@ import cakeImage from "img/cake.png";
 interface PartTimeAction {
   partTime: PartTime;
 }
-const PartTimeCard: React.FC<PartTimeAction> = ({ partTime }) => {
+function PartTimeCard({ partTime }: PartTimeAction) {
   const dateClipping = (date: string) => {
     const dateArr = date.split("-");
     const month = dateArr[1];
@@ -60,7 +60,7 @@ const PartTimeCard: React.FC<PartTimeAction> = ({ partTime }) => {
       <Button>지원자보기</Button>
     </PartTimeWrapper>
   );
-};
+}
 
 const PartTimeWrapper = styled.div`
   border: 2px solid #c5bdda;
