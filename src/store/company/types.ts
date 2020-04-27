@@ -9,6 +9,8 @@ export interface Company {
   id: string;
   name: string;
   location: string;
+  mastername: string;
+  masterId: string;
   imageList: Array<File>;
 }
 

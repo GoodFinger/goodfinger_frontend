@@ -20,3 +20,9 @@ export const register = async (data: any) => {
 
   return response;
 };
+
+export const getCompanyList = async ({ email }: { email: string }) => {
+  const response = await client1.get("/com/companys", { params: { masterId: email } });
+
+  return response;
+};

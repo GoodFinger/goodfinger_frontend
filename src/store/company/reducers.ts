@@ -16,7 +16,7 @@ import {
   UPDATE_COMPANY_FAILURE,
   DELETE_COMPANY_REQUEST,
   DELETE_COMPANY_SUCCESS,
-  DELETE_COMPANY_FAILURE
+  DELETE_COMPANY_FAILURE,
 } from "./types";
 
 const initialState: CompanyList = {
@@ -26,8 +26,10 @@ const initialState: CompanyList = {
     id: "",
     name: "",
     location: "",
-    imageList: []
-  }
+    imageList: [],
+    masterId: "",
+    mastername: "",
+  },
 };
 
 const companyReducer = (state = initialState, action: CompanyActionTypes) => {
@@ -39,7 +41,7 @@ const companyReducer = (state = initialState, action: CompanyActionTypes) => {
     case INSERT_COMPANY_REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case LIST_COMPANY_FAILURE:
     case DETAIL_COMPANY_FAILURE:
@@ -51,19 +53,19 @@ const companyReducer = (state = initialState, action: CompanyActionTypes) => {
     case DELETE_COMPANY_FAILURE:
       return {
         ...state,
-        loading: false
+        loading: false,
       };
     case LIST_COMPANY_SUCCESS:
       return {
         ...state,
         loading: false,
-        companyList: action.companyList
+        companyList: action.companyList,
       };
     case DETAIL_COMPANY_SUCCESS:
       return {
         ...state,
         selCompany: action.selCompany,
-        loading: false
+        loading: false,
       };
     default:
       return state;

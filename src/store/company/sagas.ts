@@ -22,14 +22,16 @@ import {
   INSERT_COMPANY_SUCCESS,
   UPDATE_COMPANY_SUCCESS,
 } from "./types";
-import { insertCompany, getCompanyDetail } from "lib/api/api";
+import { insertCompany, getCompanyDetail, getCompanyList } from "lib/api/api";
 
 function* companyList({ email }: ListCompanyRequestAction) {
   try {
     //call companyList
-    const companyList: Array<Company> = [
-      { id: "test", name: "test1", location: "서울시 강남구 신사동 123-4", imageList: [] },
-    ];
+    const response = yield call(getCompanyList, { email: "yy" });
+    console.log(response);
+
+    const { data } = response;
+    const companyList: Array<Company> = data;
 
     //when companyList Success
     yield put({
@@ -48,8 +50,15 @@ function* companyDetail({ id }: DetailCompanyRequestAction) {
     //call company detail
     const selCompany: Company =
       id === "test"
-        ? { id: "test", name: "test1", location: "서울시 강남구 신사동 123-4", imageList: [] }
-        : { id: "", name: "", location: "", imageList: [] };
+        ? {
+            id: "test",
+            name: "test1",
+            location: "서울시 강남구 신사동 123-4",
+            imageList: [],
+            masterId: "",
+            mastername: "",
+          }
+        : { id: "", name: "", location: "", imageList: [], masterId: "", mastername: "" };
 
     const response = yield call(getCompanyDetail, { comId: id });
     console.log(response);
