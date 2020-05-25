@@ -31,6 +31,8 @@ export const SIGNUP_USER_REQUEST = "SIGNUP_USER_REQUEST";
 export const SIGNUP_USER_SUCCESS = "SINGUP_USER_SUCCESS";
 export const SIGNUP_USER_FAILURE = "SIGNUP_USER_FAILURE";
 
+export const SET_USER_INFO = "SET_USER_INFO";
+
 export interface LoginUserRequestAction {
   type: typeof LOGIN_USER_REQUEST;
   email: string;
@@ -77,10 +79,16 @@ export interface SignUpUserFailureAction {
   loading: boolean;
 }
 
+export interface SetUserInfoAction {
+  type: typeof SET_USER_INFO;
+  data: User;
+}
+
 export type UserActionTypes =
   | LoginUserRequestAction
   | LoginUserSuccessAction
   | LoginUserFailureAction
   | SignUpUserRequestAction
   | SignUpUserSuccessAction
-  | SignUpUserFailureAction;
+  | SignUpUserFailureAction
+  | SetUserInfoAction;

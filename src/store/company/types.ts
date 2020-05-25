@@ -11,7 +11,7 @@ export interface Company {
   location: string;
   mastername: string;
   masterId: string;
-  imageList: Array<File>;
+  picture: Array<string>;
 }
 
 /** define action */

@@ -54,14 +54,15 @@ const CompanyListContainer: React.FC<Company> = () => {
           <div>
             <AddBtn onClick={onCompanyAdd}>근무지 추가</AddBtn>
           </div>
-          {companyList.map(company => (
-            <CompanyCard
-              company={company}
-              key={company.id}
-              onCompanyDelete={onCompanyDelete}
-              onCompanyUpdate={onCompanyUpdate}
-            />
-          ))}
+          {companyList &&
+            companyList.map((company) => (
+              <CompanyCard
+                company={company}
+                key={company.id}
+                onCompanyDelete={onCompanyDelete}
+                onCompanyUpdate={onCompanyUpdate}
+              />
+            ))}
         </CompanyListWrapper>
       )}
     </div>

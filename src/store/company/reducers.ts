@@ -26,13 +26,14 @@ const initialState: CompanyList = {
     id: "",
     name: "",
     location: "",
-    imageList: [],
+    picture: [],
     masterId: "",
     mastername: "",
   },
 };
 
 const companyReducer = (state = initialState, action: CompanyActionTypes) => {
+  console.log(action);
   switch (action.type) {
     case LIST_COMPANY_REQUEST:
     case DETAIL_COMPANY_REQUEST:

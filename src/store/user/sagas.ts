@@ -10,7 +10,7 @@ import {
   SIGNUP_USER_SUCCESS,
   SIGNUP_USER_FAILURE,
 } from "./types";
-import { register } from "lib/api/api";
+import { register, userLogin } from "lib/api/api";
 
 function* signUp({ email, password, name, birth, isBoss, sex }: SignUpUserRequestAction) {
   //yield put() -- start loading
@@ -26,7 +26,8 @@ function* signUp({ email, password, name, birth, isBoss, sex }: SignUpUserReques
     };
     console.log(email, password, name, birth, isBoss, sex);
 
-    const reponse = yield call(register, data);
+    const response = yield call(register, data);
+    console.log(response);
 
     //when signup success
     yield put({
@@ -38,6 +39,8 @@ function* signUp({ email, password, name, birth, isBoss, sex }: SignUpUserReques
       sex,
       isBoss,
     });
+
+    localStorage.setItem("goodfinger", JSON.stringify(data));
 
     if (isBoss) {
       yield call(push, "/companyList");
@@ -55,7 +58,13 @@ function* login({ email, password }: LoginUserRequestAction) {
   //yield put() -- start loading
   try {
     console.log(email, password);
+    const data = {
+      email,
+      password,
+    };
     //login start codes
+    const response = yield call(userLogin, data);
+    console.log(response);
 
     //when login success
     yield put({
@@ -63,6 +72,8 @@ function* login({ email, password }: LoginUserRequestAction) {
       email,
       password,
     });
+
+    localStorage.setItem("goodfinger", JSON.stringify(data));
 
     const isBoss = true;
 

@@ -7,7 +7,8 @@ import {
   SIGNUP_USER_REQUEST,
   SIGNUP_USER_SUCCESS,
   SIGNUP_USER_FAILURE,
-  UserActionTypes
+  UserActionTypes,
+  SET_USER_INFO,
 } from "./types";
 
 const initialState: User = {
@@ -21,7 +22,7 @@ const initialState: User = {
   introduction: "",
   partTimeHistory: [],
   loading: false,
-  isLogging: false
+  isLogging: false,
 };
 
 const userReducer = (state = initialState, action: UserActionTypes) => {
@@ -29,7 +30,7 @@ const userReducer = (state = initialState, action: UserActionTypes) => {
     case SIGNUP_USER_REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case SIGNUP_USER_SUCCESS:
       return {
@@ -39,17 +40,17 @@ const userReducer = (state = initialState, action: UserActionTypes) => {
         password: action.password,
         name: action.name,
         birth: action.birth,
-        isBoss: action.isBoss
+        isBoss: action.isBoss,
       };
     case SIGNUP_USER_FAILURE:
       return {
         ...state,
-        loading: false
+        loading: false,
       };
     case LOGIN_USER_REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case LOGIN_USER_SUCCESS:
       return {
@@ -57,12 +58,21 @@ const userReducer = (state = initialState, action: UserActionTypes) => {
         loading: false,
         email: action.email,
         password: action.password,
-        isLogging: true
+        isLogging: true,
       };
     case LOGIN_USER_FAILURE:
       return {
         ...state,
-        loading: false
+        loading: false,
+      };
+    case SET_USER_INFO:
+      return {
+        ...state,
+        email: action.data.email,
+        password: action.data.password,
+        name: action.data.name,
+        birth: action.data.birth,
+        isBoss: action.data.isBoss,
       };
     default:
       return state;

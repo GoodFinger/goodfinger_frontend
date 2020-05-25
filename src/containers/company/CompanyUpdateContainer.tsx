@@ -23,7 +23,8 @@ const CompanyUpdateContainer: React.SFC<RouteComponentProps<MatchParams>> = ({ m
   const [name, setName] = useInput(selCompany.name);
   const [location, setLocation] = useInput(selCompany.location);
   const [error, setError] = useState<Array<Error>>([]);
-  const [imageList, setImageList] = useState<Array<File>>(selCompany.imageList);
+  const [picture, setPicture] = useState<Array<string>>(selCompany.picture);
+  const [imageList, setImageList] = useState<Array<File>>([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 

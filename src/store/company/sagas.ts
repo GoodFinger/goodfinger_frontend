@@ -27,16 +27,16 @@ import { insertCompany, getCompanyDetail, getCompanyList } from "lib/api/api";
 function* companyList({ email }: ListCompanyRequestAction) {
   try {
     //call companyList
-    const response = yield call(getCompanyList, { email: "yy" });
+    const response = yield call(getCompanyList, { email });
     console.log(response);
 
     const { data } = response;
-    const companyList: Array<Company> = data;
+    console.log(data, data.length);
 
     //when companyList Success
     yield put({
       type: LIST_COMPANY_SUCCESS,
-      companyList,
+      companyList: data as Array<Company>,
     });
   } catch (e) {
     yield put({
@@ -54,13 +54,13 @@ function* companyDetail({ id }: DetailCompanyRequestAction) {
             id: "test",
             name: "test1",
             location: "서울시 강남구 신사동 123-4",
-            imageList: [],
+            picture: [],
             masterId: "",
             mastername: "",
           }
-        : { id: "", name: "", location: "", imageList: [], masterId: "", mastername: "" };
+        : { id: "", name: "", location: "", picture: [], masterId: "", mastername: "" };
 
-    const response = yield call(getCompanyDetail, { comId: id });
+    const response = yield call(getCompanyDetail, { masterId: id });
     console.log(response);
 
     if (response.code === 200) {
@@ -90,12 +90,12 @@ function* companyInsert({
     const data = new FormData();
     const text = {
       mastername,
-      email,
+      masterId: email,
       name,
       location,
     };
 
-    data.append("comstring", JSON.stringify(text));
+    data.append("company", JSON.stringify(text));
 
     imageList.forEach((image) => data.append("files", image));
 
@@ -103,7 +103,7 @@ function* companyInsert({
     console.log(response);
 
     //when success
-    if (response.code === 200) {
+    if (response.status === 200) {
       //1. insert company success
       yield put({
         type: INSERT_COMPANY_SUCCESS,

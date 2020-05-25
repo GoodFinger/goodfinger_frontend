@@ -13,9 +13,8 @@ const CompanyCard: React.FC<CompanyAction> = ({ company, onCompanyDelete, onComp
   return (
     <CardWrapper id={company.id}>
       <CompanyImage>
-        {company.imageList.length !== 0 ? (
-          // <img src={company.imageList[0]} alt="company" />
-          <img src={cakeImage} alt="no_image" />
+        {company.picture && company.picture.length !== 0 ? (
+          <img src={"http://54.180.102.186" + company.picture[0]} alt="company" />
         ) : (
           <img src={cakeImage} alt="no_image" />
         )}
