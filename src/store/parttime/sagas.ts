@@ -1,4 +1,4 @@
-import { put, takeLatest, all } from "redux-saga/effects";
+import { put, takeLatest, all, call } from "redux-saga/effects";
 // import { push } from "lib/historyUtils";
 // import axios from "axios";
 import {
@@ -6,11 +6,15 @@ import {
   PartTime,
   LIST_PARTTIME_FAILURE,
   LIST_PARTTIME_SUCCESS,
-  LIST_PARTTIME_REQUEST
+  LIST_PARTTIME_REQUEST,
 } from "./types";
+import { testPartTime } from "lib/api/api";
 
 function* partTimeList({ email }: ListPartTimeRequestAction) {
   try {
+    const response = yield call(testPartTime);
+
+    console.log(response);
     //call parttimelist
     const partTimeList: Array<PartTime> = [
       {
@@ -34,25 +38,25 @@ function* partTimeList({ email }: ListPartTimeRequestAction) {
         etc: {
           salaryRightNow: "Y",
           breaktime: "Y",
-          oneDayWorker: "Y"
+          oneDayWorker: "Y",
         },
         jobOffer: {
           introduction: "우와아아아ㅏ아앙",
-          picture: []
+          picture: [],
         },
         memo: "메모입니당",
         applicant: [],
-        questionList: []
-      }
+        questionList: [],
+      },
     ];
 
     yield put({
       type: LIST_PARTTIME_SUCCESS,
-      partTimeList
+      partTimeList,
     });
   } catch (e) {
     yield put({
-      type: LIST_PARTTIME_FAILURE
+      type: LIST_PARTTIME_FAILURE,
     });
   }
 }

@@ -5,9 +5,16 @@ import MenuButton from "components/common/MenuButton";
 
 import cakeImage from "img/cake.png";
 
-const BossHeader = () => {
+interface HeaderProps {
+  onLogout: () => void;
+}
+
+const BossHeader = ({ onLogout }: HeaderProps) => {
   return (
     <HeaderWrapper>
+      <Logout>
+        <span onClick={onLogout}>로그아웃</span>
+      </Logout>
       <HeaderMax>
         <MenuButton name="공고등록" url="parttimeAdd" image={cakeImage} />
         <MenuButton name="공고내역" url="parttimeList" image={cakeImage} />
@@ -17,6 +24,10 @@ const BossHeader = () => {
     </HeaderWrapper>
   );
 };
+
+const Logout = styled.div`
+  text-align: right;
+`;
 
 const HeaderWrapper = styled.div`
   background-color: #534871;

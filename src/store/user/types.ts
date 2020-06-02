@@ -31,6 +31,10 @@ export const SIGNUP_USER_REQUEST = "SIGNUP_USER_REQUEST";
 export const SIGNUP_USER_SUCCESS = "SINGUP_USER_SUCCESS";
 export const SIGNUP_USER_FAILURE = "SIGNUP_USER_FAILURE";
 
+export const LOGOUT_USER_REQUEST = "LOGOUT_USER_REQUEST";
+export const LOGOUT_USER_SUCCESS = "LOGOUT_USER_SUCCESS";
+export const LOGOUT_USER_FAILURE = "LOGOUT_USER_FAILURE";
+
 export const SET_USER_INFO = "SET_USER_INFO";
 
 export interface LoginUserRequestAction {
@@ -84,6 +88,24 @@ export interface SetUserInfoAction {
   data: User;
 }
 
+export interface LogoutUserRequestAction {
+  type: typeof LOGOUT_USER_REQUEST;
+  email: string;
+}
+
+export interface LogoutUserSuccessAction {
+  type: typeof LOGOUT_USER_SUCCESS;
+}
+
+export interface LogoutUserFailureAction {
+  type: typeof LOGOUT_USER_FAILURE;
+}
+
+export type LogoutActionTypes =
+  | LogoutUserRequestAction
+  | LogoutUserSuccessAction
+  | LogoutUserFailureAction;
+
 export type UserActionTypes =
   | LoginUserRequestAction
   | LoginUserSuccessAction
@@ -91,4 +113,5 @@ export type UserActionTypes =
   | SignUpUserRequestAction
   | SignUpUserSuccessAction
   | SignUpUserFailureAction
-  | SetUserInfoAction;
+  | SetUserInfoAction
+  | LogoutActionTypes;

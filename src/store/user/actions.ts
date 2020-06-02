@@ -1,5 +1,11 @@
 /** import types */
-import { LOGIN_USER_REQUEST, SIGNUP_USER_REQUEST, User, SET_USER_INFO } from "./types";
+import {
+  LOGIN_USER_REQUEST,
+  SIGNUP_USER_REQUEST,
+  User,
+  SET_USER_INFO,
+  LOGOUT_USER_REQUEST,
+} from "./types";
 
 /** TypeScript infers that this function is returning LoginUserAction */
 export const loginUser = ({ email, password }: { email: string; password: string }) => ({
@@ -35,4 +41,9 @@ export const signupUser = ({
 export const setUserInfo = (data: User) => ({
   type: SET_USER_INFO,
   data,
+});
+
+export const logoutUser = (email: string) => ({
+  type: LOGOUT_USER_REQUEST,
+  email,
 });

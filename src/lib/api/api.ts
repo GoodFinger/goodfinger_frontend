@@ -1,4 +1,4 @@
-import { client1, client2 } from "./client";
+import { client1, client2, client3 } from "./client";
 
 export const insertCompany = async ({ data }: { data: any }) => {
   const response = await client1.post("/com/insert", data, {
@@ -29,5 +29,15 @@ export const getCompanyList = async ({ email }: { email: string }) => {
 
 export const userLogin = async (data: any) => {
   const response = await client2.post("/signIn", data);
+  return response;
+};
+
+export const userLogout = (email: string) => {
+  const response = client2.post("/logOut", { params: { email } });
+  return response;
+};
+
+export const testPartTime = () => {
+  const response = client3.get("/getHello");
   return response;
 };

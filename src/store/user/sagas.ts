@@ -9,14 +9,18 @@ import {
   SIGNUP_USER_REQUEST,
   SIGNUP_USER_SUCCESS,
   SIGNUP_USER_FAILURE,
+  LogoutUserRequestAction,
+  LOGOUT_USER_FAILURE,
+  LOGOUT_USER_SUCCESS,
+  LOGOUT_USER_REQUEST,
 } from "./types";
-import { register, userLogin } from "lib/api/api";
+import { register, userLogin, userLogout } from "lib/api/api";
 
 function* signUp({ email, password, name, birth, isBoss, sex }: SignUpUserRequestAction) {
   //yield put() -- start loading
   try {
     //signup start code
-    const data = {
+    const info = {
       email,
       password,
       name,
@@ -26,9 +30,10 @@ function* signUp({ email, password, name, birth, isBoss, sex }: SignUpUserReques
     };
     console.log(email, password, name, birth, isBoss, sex);
 
-    const response = yield call(register, data);
+    const response = yield call(register, info);
     console.log(response);
 
+    const { data } = response;
     //when signup success
     yield put({
       type: SIGNUP_USER_SUCCESS,
@@ -40,7 +45,7 @@ function* signUp({ email, password, name, birth, isBoss, sex }: SignUpUserReques
       isBoss,
     });
 
-    localStorage.setItem("goodfinger", JSON.stringify(data));
+    localStorage.setItem("goodfinger", JSON.stringify(info));
 
     if (isBoss) {
       yield call(push, "/companyList");
@@ -58,12 +63,12 @@ function* login({ email, password }: LoginUserRequestAction) {
   //yield put() -- start loading
   try {
     console.log(email, password);
-    const data = {
+    const info = {
       email,
       password,
     };
     //login start codes
-    const response = yield call(userLogin, data);
+    const response = yield call(userLogin, info);
     console.log(response);
 
     //when login success
@@ -72,8 +77,7 @@ function* login({ email, password }: LoginUserRequestAction) {
       email,
       password,
     });
-
-    localStorage.setItem("goodfinger", JSON.stringify(data));
+    localStorage.setItem("goodfinger", JSON.stringify(info));
 
     const isBoss = true;
 
@@ -90,6 +94,25 @@ function* login({ email, password }: LoginUserRequestAction) {
   }
 }
 
+function* logout({ email }: LogoutUserRequestAction) {
+  try {
+    const response = yield call(userLogout, email);
+    const { status } = response;
+    console.log(response);
+    if (status === 200) {
+      yield put({
+        type: LOGOUT_USER_SUCCESS,
+      });
+
+      localStorage.removeItem("goodfinger");
+    }
+  } catch (e) {
+    yield put({
+      type: LOGOUT_USER_FAILURE,
+    });
+  }
+}
+
 function* singUpRequest() {
   yield takeLatest(SIGNUP_USER_REQUEST, signUp);
 }
@@ -98,6 +121,10 @@ function* loginRequest() {
   yield takeLatest(LOGIN_USER_REQUEST, login);
 }
 
+function* logoutRequest() {
+  yield takeLatest(LOGOUT_USER_REQUEST, logout);
+}
+
 export default function* userSaga() {
-  yield all([singUpRequest(), loginRequest()]);
+  yield all([singUpRequest(), loginRequest(), logoutRequest()]);
 }
