@@ -5,6 +5,7 @@ interface CompanyProps {
   name: string;
   location: string;
   imageList: Array<File>;
+  picture: Array<string>;
   error: Array<Error>;
   setName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setLocation: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -25,9 +26,10 @@ const CompanyAddForm: React.FC<CompanyProps> = ({
   location,
   setLocation,
   error,
+  picture,
   imageList,
   addImageList,
-  deleteImageList
+  deleteImageList,
 }) => {
   const onAddCompany = () => {
     addCompany();
@@ -70,19 +72,28 @@ const CompanyAddForm: React.FC<CompanyProps> = ({
           </label>
           <input type="file" name="image" accept="image/*" id="ex_file" onChange={onAddImage} />
         </ImageTitle>
-        {imageList.length > 0 ? (
-          imageList.map((image, idx) => (
-            <Image realImage={true} key={image.lastModified + "_" + idx}>
-              <img src={URL.createObjectURL(image)} alt="company" />
-              <DeleteBtn onClick={onDeleteImage} data-index={idx}>
+        {picture &&
+          picture.length > 0 &&
+          picture.map((image, idx) => (
+            <Image realImage={true} key={image + "_" + idx}>
+              <img src={process.env.REACT_APP_CLIENT_API1 + image} alt="company" />
+              <DeleteBtn onClick={onDeleteImage} data-index={idx} data-flag="edit">
                 X
               </DeleteBtn>
             </Image>
-          ))
-        ) : (
-          <>
-            <Image realImage={false}>이미지를 등록하세요</Image>
-          </>
+          ))}
+        {imageList &&
+          imageList.length > 0 &&
+          imageList.map((image, idx) => (
+            <Image realImage={true} key={image.lastModified + "_" + idx}>
+              <img src={URL.createObjectURL(image)} alt="company" />
+              <DeleteBtn onClick={onDeleteImage} data-index={idx} data-flag="add">
+                X
+              </DeleteBtn>
+            </Image>
+          ))}
+        {(!imageList || imageList.length === 0) && (!picture || picture.length === 0) && (
+          <Image realImage={false}>이미지를 등록하세요</Image>
         )}
       </FormDiv>
       <FormDiv>

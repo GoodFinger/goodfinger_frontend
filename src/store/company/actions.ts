@@ -12,10 +12,10 @@ export const getCompanyList = ({ email }: { email: string }) => ({
   email,
 });
 
-export const getCompanyDetail = ({ email, id }: { email: string; id: string }) => ({
+export const getCompanyDetail = ({ email, comId }: { email: string; comId: string }) => ({
   type: DETAIL_COMPANY_REQUEST,
   email,
-  id,
+  comId,
 });
 
 export const insertComapny = ({
@@ -45,12 +45,16 @@ export const updateCompany = ({
   name,
   location,
   imageList,
+  mastername,
+  picture,
 }: {
   email: string;
   id: string;
   name: string;
   location: string;
   imageList: Array<File>;
+  mastername: string;
+  picture: Array<string>;
 }) => ({
   type: UPDATE_COMPANY_REQUEST,
   email,
@@ -58,6 +62,8 @@ export const updateCompany = ({
   name,
   location,
   imageList,
+  mastername,
+  picture,
 });
 
 export const deleteCompany = ({ email, id }: { email: string; id: string }) => ({

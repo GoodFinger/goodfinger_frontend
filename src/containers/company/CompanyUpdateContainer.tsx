@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
 import useInput from "lib/useInput";
 import CompanyAddForm from "components/boss/CompanyAddForm";
-import { updateCompany, getCompanyDetail } from "store/company/actions";
+import { updateCompany } from "store/company/actions";
 import { RouteComponentProps } from "react-router-dom";
 
 interface MatchParams {
@@ -30,7 +30,6 @@ const CompanyUpdateContainer: React.SFC<RouteComponentProps<MatchParams>> = ({ m
 
   useEffect(() => {
     setLoading(true);
-    dispatch(getCompanyDetail({ email, id }));
     setLoading(false);
     return () => {};
   }, [dispatch, email, id]);
@@ -39,7 +38,17 @@ const CompanyUpdateContainer: React.SFC<RouteComponentProps<MatchParams>> = ({ m
     const errorList: Array<Error> = validationCheck(name, location);
 
     if (errorList.length === 0) {
-      dispatch(updateCompany({ id, email, name, location, imageList }));
+      dispatch(
+        updateCompany({
+          id,
+          email,
+          name,
+          location,
+          imageList,
+          mastername: selCompany.mastername,
+          picture,
+        })
+      );
     } else {
       setError(errorList);
       return;
@@ -58,8 +67,13 @@ const CompanyUpdateContainer: React.SFC<RouteComponentProps<MatchParams>> = ({ m
 
   const deleteImageList = (e: React.MouseEvent<HTMLElement>) => {
     const idx = e.currentTarget.dataset.index;
+    const { flag } = e.currentTarget.dataset;
 
-    setImageList(imageList.filter((image, index) => index !== Number(idx)));
+    if (flag === "add") {
+      setImageList(imageList.filter((image, index) => index !== Number(idx)));
+    } else {
+      setPicture(picture.filter((image, index) => index !== Number(idx)));
+    }
   };
 
   const validationCheck = (name: string, location: string) => {
@@ -86,6 +100,7 @@ const CompanyUpdateContainer: React.SFC<RouteComponentProps<MatchParams>> = ({ m
           location={location}
           setLocation={setLocation}
           imageList={imageList}
+          picture={picture}
           addImageList={addImageList}
           deleteImageList={deleteImageList}
           error={error}

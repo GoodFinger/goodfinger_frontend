@@ -61,7 +61,7 @@ export interface ListCompanyFailureAction {
 export interface DetailCompanyRequestAction {
   type: typeof DETAIL_COMPANY_REQUEST;
   email: string;
-  id: string;
+  comId: string;
   loading: boolean;
 }
 
@@ -92,7 +92,7 @@ export interface InsertCompanySuccessAction {
   email: string;
   name: string;
   location: string;
-  imageList: Array<string>;
+  imageList: Array<File>;
 }
 
 export interface InsertCompanyFailureAction {
@@ -106,8 +106,10 @@ export interface UpdateCompanyRequestAction {
   id: string;
   name: string;
   location: string;
-  imageList: Array<string>;
+  imageList: Array<File>;
   loading: boolean;
+  picture: Array<string>;
+  mastername: string;
 }
 
 export interface UpdateCompanySuccessAction {

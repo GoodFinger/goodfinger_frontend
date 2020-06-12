@@ -1,15 +1,15 @@
 import axios from "axios";
 
 export const client1 = axios.create({
-  baseURL: "http://54.180.102.186",
+  baseURL: process.env.REACT_APP_CLIENT_API1,
 });
 
 export const client2 = axios.create({
-  baseURL: "http://54.180.102.186:8080",
+  baseURL: process.env.REACT_APP_CLIENT_API2,
 });
 
 export const client3 = axios.create({
-  baseURL: "http://54.180.102.186:8081",
+  baseURL: process.env.REACT_APP_CLIENT_API3,
 });
 
 client1.defaults.headers.post["Content-Type"] = "application/json";

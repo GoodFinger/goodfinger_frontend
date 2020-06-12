@@ -28,12 +28,14 @@ function* signUp({ email, password, name, birth, isBoss, sex }: SignUpUserReques
       isBoss,
       sex,
     };
-    console.log(email, password, name, birth, isBoss, sex);
 
     const response = yield call(register, info);
-    console.log(response);
+    const { status } = response;
 
-    const { data } = response;
+    if (status !== 200) {
+      return;
+    }
+
     //when signup success
     yield put({
       type: SIGNUP_USER_SUCCESS,
@@ -45,7 +47,7 @@ function* signUp({ email, password, name, birth, isBoss, sex }: SignUpUserReques
       isBoss,
     });
 
-    localStorage.setItem("goodfinger", JSON.stringify(info));
+    localStorage.setItem("goodfinger", JSON.stringify({ email, name }));
 
     if (isBoss) {
       yield call(push, "/companyList");
@@ -62,32 +64,33 @@ function* signUp({ email, password, name, birth, isBoss, sex }: SignUpUserReques
 function* login({ email, password }: LoginUserRequestAction) {
   //yield put() -- start loading
   try {
-    console.log(email, password);
     const info = {
       email,
       password,
     };
     //login start codes
     const response = yield call(userLogin, info);
-    console.log(response);
+    const { status } = response;
+    if (status === 200) {
+      //when login success
+      yield put({
+        type: LOGIN_USER_SUCCESS,
+        email,
+        password,
+      });
 
-    //when login success
-    yield put({
-      type: LOGIN_USER_SUCCESS,
-      email,
-      password,
-    });
-    localStorage.setItem("goodfinger", JSON.stringify(info));
+      localStorage.setItem("goodfinger", JSON.stringify({ email }));
 
-    const isBoss = true;
+      const isBoss = true;
 
-    if (isBoss) {
-      yield call(push, "/companyList");
-    } else {
-      yield call(push, "/parttimeMain");
+      if (isBoss) {
+        yield call(push, "/companyList");
+      } else {
+        yield call(push, "/parttimeMain");
+      }
     }
   } catch (e) {
-    console.log(e);
+    alert(e.response.data.message);
     yield put({
       type: LOGIN_USER_FAILURE,
     });
@@ -98,13 +101,14 @@ function* logout({ email }: LogoutUserRequestAction) {
   try {
     const response = yield call(userLogout, email);
     const { status } = response;
-    console.log(response);
+
     if (status === 200) {
       yield put({
         type: LOGOUT_USER_SUCCESS,
       });
 
       localStorage.removeItem("goodfinger");
+      yield call(push, "/");
     }
   } catch (e) {
     yield put({

@@ -8,8 +8,21 @@ export const insertCompany = async ({ data }: { data: any }) => {
   return response;
 };
 
-export const getCompanyDetail = async ({ masterId }: { masterId: string }) => {
-  const response = await client1.get("/com/company", { params: { masterId } });
+export const updateCompany = async ({ data }: { data: any }) => {
+  const response = await client1.post("/com/update", data, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
+  return response;
+};
+
+export const deleteCompany = async ({ comId }: { comId: string }) => {
+  const response = await client1.post("/com/delete?comId=" + comId);
+  return response;
+};
+
+export const getCompanyDetail = async ({ comId }: { comId: string }) => {
+  const response = await client1.get("/com/company", { params: { comId } });
 
   return response;
 };
@@ -38,6 +51,6 @@ export const userLogout = (email: string) => {
 };
 
 export const testPartTime = () => {
-  const response = client3.get("/getHello");
+  const response = client3.get("/hello");
   return response;
 };

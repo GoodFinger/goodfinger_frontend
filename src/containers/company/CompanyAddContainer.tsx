@@ -73,6 +73,7 @@ const CompanyAddContainer: React.FC<Company> = () => {
         addImageList={addImageList}
         deleteImageList={deleteImageList}
         error={error}
+        picture={[]}
       ></CompanyAddForm>
     </CompanyAddWrapper>
   );

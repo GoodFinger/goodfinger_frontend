@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
+import dotenv from "dotenv";
 
 import BossLayout from "components/boss/BossLayout";
 
@@ -13,6 +14,8 @@ import PartTimeAddContainer from "containers/boss/PartTimeAddContainer";
 import "./App.css";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "store/user/actions";
+
+dotenv.config();
 
 const App: React.FC = () => {
   const dispatch = useDispatch();

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
-import { getCompanyList, deleteCompany } from "store/company/actions";
+import { getCompanyList, deleteCompany, getCompanyDetail } from "store/company/actions";
 import { CompanyList } from "store/company/types";
 import CompanyCard from "components/boss/CompanyCard";
 import { push } from "lib/historyUtils";
@@ -23,12 +23,12 @@ const CompanyListContainer: React.FC<Company> = () => {
 
   const onCompanyDelete = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.currentTarget;
-    const id = target.dataset.companyid || "";
+    const { companyid } = target.dataset;
 
     const response = window.confirm("정말로 삭제하시겠습니까?");
 
-    if (response) {
-      dispatch(deleteCompany({ email, id }));
+    if (response && companyid) {
+      dispatch(deleteCompany({ email, id: companyid }));
     }
   };
 
@@ -36,7 +36,10 @@ const CompanyListContainer: React.FC<Company> = () => {
     const target = e.currentTarget;
     const id = target.dataset.companyid || "";
 
-    push("/companyUpdate/" + id);
+    if (id) {
+      dispatch(getCompanyDetail({ email, comId: id }));
+    }
+    //push("/companyUpdate/" + id);
   };
 
   useEffect(() => {

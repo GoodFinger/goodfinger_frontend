@@ -21,17 +21,22 @@ import {
   DETAIL_COMPANY_SUCCESS,
   INSERT_COMPANY_SUCCESS,
   UPDATE_COMPANY_SUCCESS,
+  DELETE_COMPANY_SUCCESS,
 } from "./types";
-import { insertCompany, getCompanyDetail, getCompanyList } from "lib/api/api";
+import {
+  insertCompany,
+  getCompanyDetail,
+  getCompanyList,
+  updateCompany,
+  deleteCompany,
+} from "lib/api/api";
 
 function* companyList({ email }: ListCompanyRequestAction) {
   try {
     //call companyList
     const response = yield call(getCompanyList, { email });
-    console.log(response);
 
     const { data } = response;
-    console.log(data, data.length);
 
     //when companyList Success
     yield put({
@@ -45,30 +50,21 @@ function* companyList({ email }: ListCompanyRequestAction) {
   }
 }
 
-function* companyDetail({ id }: DetailCompanyRequestAction) {
+function* companyDetail({ comId }: DetailCompanyRequestAction) {
   try {
     //call company detail
-    const selCompany: Company =
-      id === "test"
-        ? {
-            id: "test",
-            name: "test1",
-            location: "서울시 강남구 신사동 123-4",
-            picture: [],
-            masterId: "",
-            mastername: "",
-          }
-        : { id: "", name: "", location: "", picture: [], masterId: "", mastername: "" };
 
-    const response = yield call(getCompanyDetail, { masterId: id });
-    console.log(response);
-
-    if (response.code === 200) {
+    const response = yield call(getCompanyDetail, { comId });
+    const { status, data } = response;
+    console.log(data);
+    if (status === 200) {
       //when company detail call success
       yield put({
         type: DETAIL_COMPANY_SUCCESS,
-        selCompany,
+        selCompany: data,
       });
+
+      yield call(push, "/companyUpdate/" + comId);
     }
   } catch (e) {
     yield put({
@@ -86,7 +82,6 @@ function* companyInsert({
 }: InsertCompanyRequestAction) {
   try {
     //call insert company
-    console.log(email, name, location, imageList, mastername);
     const data = new FormData();
     const text = {
       mastername,
@@ -100,10 +95,10 @@ function* companyInsert({
     imageList.forEach((image) => data.append("files", image));
 
     const response = yield call(insertCompany, { data });
-    console.log(response);
+    const { status } = response;
 
     //when success
-    if (response.status === 200) {
+    if (status === 200) {
       //1. insert company success
       yield put({
         type: INSERT_COMPANY_SUCCESS,
@@ -118,11 +113,39 @@ function* companyInsert({
   }
 }
 
-function* companyUpdate({ email, id, name, location, imageList }: UpdateCompanyRequestAction) {
+function* companyUpdate({
+  email,
+  id,
+  name,
+  location,
+  imageList,
+  picture,
+  mastername,
+}: UpdateCompanyRequestAction) {
   try {
     //call update company
-    console.log(email, id, name, location, imageList);
+    const data = new FormData();
+    const text = {
+      mastername,
+      masterId: email,
+      name,
+      location,
+      picture,
+    };
 
+    data.append("company", JSON.stringify(text));
+    data.append("comId", id);
+
+    imageList.forEach((image) => data.append("files", image));
+
+    const response = yield call(updateCompany, { data });
+    const { status } = response;
+    console.log(response);
+    if (status !== 200) {
+      yield put({
+        type: UPDATE_COMPANY_FAILURE,
+      });
+    }
     //when success
     //1. update company success
     yield put({
@@ -140,11 +163,18 @@ function* companyUpdate({ email, id, name, location, imageList }: UpdateCompanyR
 function* companyDelete({ email, id }: DeleteCompanyRequestAction) {
   try {
     //call delete company
+    const response = yield call(deleteCompany, { comId: id });
+    const { data } = response;
 
+    console.log(response);
+
+    if (data !== "ok") {
+      return;
+    }
     //when success
     //1. delete company success
     yield put({
-      type: DELETE_COMPANY_REQUEST,
+      type: DELETE_COMPANY_SUCCESS,
     });
     //2. push to companylist url
     yield call(push, "/companyList");
