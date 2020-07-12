@@ -8,12 +8,12 @@ export interface User {
   sex: string;
   isBoss: boolean;
   introduction: string;
-  partTimeHistory: Array<PartTime>;
+  partTimeHistory: Array<PartTimeInfo>;
   loading: boolean;
   isLogging: boolean;
 }
 
-export interface PartTime {
+export interface PartTimeInfo {
   startDate: string;
   endDate: string;
   contents: string;

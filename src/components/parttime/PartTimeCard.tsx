@@ -19,7 +19,7 @@ function PartTimeCard({ partTime }: PartTimeAction) {
     <PartTimeWrapper id={partTime.announcementId}>
       <TopWrapper>
         <ImageWrapper>
-          {partTime.imageList.length !== 0 ? (
+          {partTime.imageList && partTime.imageList.length !== 0 ? (
             // <img src={company.imageList[0]} alt="company" />
             <img src={cakeImage} alt="no_image" />
           ) : (
@@ -30,7 +30,7 @@ function PartTimeCard({ partTime }: PartTimeAction) {
           <PartTimeName>{partTime.company}</PartTimeName>
           <PartTimeTask>{partTime.locationCity + " " + partTime.locatinDistrict}</PartTimeTask>
           <PartTimeTask>
-            {partTime.category.map(type => (
+            {partTime.category.map((type) => (
               <Type key={type}>{type}</Type>
             ))}
           </PartTimeTask>

@@ -8,14 +8,15 @@ export interface ParttimeList {
 }
 
 export interface PartTime {
-  announcementId: string;
+  announcementId?: string;
   flag: string; // is parttime announcement finished?
-  createDate: string;
+  createDate?: string;
   company: string; //company id? or company name?
-  imageList: Array<string>;
+  imageList?: Array<string>;
+  picture?: Array<File>;
   category: Array<string>;
-  locationCity: string;
-  locatinDistrict: string;
+  locationCity?: string;
+  locatinDistrict?: string;
   recruitment: number;
   preferredSex: string;
   preferredAge: Array<number>;
@@ -28,8 +29,9 @@ export interface PartTime {
   etc: EtcOption;
   jobOffer: JobOffer;
   memo: string;
-  applicant: Array<string>;
-  questionList: Array<Question>;
+  applicant?: Array<string>;
+  questionList?: Array<Question>;
+  applicant_questions?: Array<string>;
 }
 
 export interface EtcOption {
@@ -181,7 +183,7 @@ export interface DetailPartTimeFailureAction {
 
 export interface InsertPartTimeRequestAction {
   type: typeof INSERT_PARTTIME_REQUEST;
-  loading: boolean;
+  parttime: PartTime;
   email: string;
   flag: string; // is parttime announcement finished?
   createDate: string;

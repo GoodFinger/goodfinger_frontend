@@ -1,59 +1,45 @@
 import { put, takeLatest, all, call } from "redux-saga/effects";
-// import { push } from "lib/historyUtils";
+import { push } from "lib/historyUtils";
 // import axios from "axios";
 import {
   ListPartTimeRequestAction,
-  PartTime,
   LIST_PARTTIME_FAILURE,
   LIST_PARTTIME_SUCCESS,
   LIST_PARTTIME_REQUEST,
+  InsertPartTimeRequestAction,
+  INSERT_PARTTIME_FAILURE,
+  INSERT_PARTTIME_REQUEST,
 } from "./types";
-import { testPartTime } from "lib/api/api";
+import { getPartTimeList, addParttime } from "lib/api/api";
+
+function* insertParttime({ parttime }: InsertPartTimeRequestAction) {
+  try {
+    const response = yield call(addParttime, parttime);
+    const { status } = response;
+
+    if (status === 200) {
+      yield call(push, "/parttimeList");
+    }
+  } catch (e) {
+    yield put({
+      type: INSERT_PARTTIME_FAILURE,
+    });
+  }
+}
 
 function* partTimeList({ email }: ListPartTimeRequestAction) {
   try {
-    const response = yield call(testPartTime);
+    const response = yield call(getPartTimeList, { email });
 
+    const { status, data } = response;
     console.log(response);
-    //call parttimelist
-    const partTimeList: Array<PartTime> = [
-      {
-        announcementId: "test1",
-        flag: "true",
-        createDate: "2020-03-03",
-        company: "testcompany",
-        imageList: [],
-        category: ["서빙", "헬롱"],
-        locationCity: "서울",
-        locatinDistrict: "강남구",
-        recruitment: 3,
-        preferredSex: "A",
-        preferredAge: [20, 30, 40],
-        task: "서빙업무입니다.",
-        startDate: "2020-03-10",
-        endDate: "2020-03-12",
-        startTime: "09:00",
-        endTime: "18:00",
-        salary: ["day", "150000"],
-        etc: {
-          salaryRightNow: "Y",
-          breaktime: "Y",
-          oneDayWorker: "Y",
-        },
-        jobOffer: {
-          introduction: "우와아아아ㅏ아앙",
-          picture: [],
-        },
-        memo: "메모입니당",
-        applicant: [],
-        questionList: [],
-      },
-    ];
 
-    yield put({
-      type: LIST_PARTTIME_SUCCESS,
-      partTimeList,
-    });
+    if (status === 200) {
+      yield put({
+        type: LIST_PARTTIME_SUCCESS,
+        partTimeList: data,
+      });
+    }
   } catch (e) {
     yield put({
       type: LIST_PARTTIME_FAILURE,
@@ -63,6 +49,7 @@ function* partTimeList({ email }: ListPartTimeRequestAction) {
 
 function* partTimeListRequest() {
   yield takeLatest(LIST_PARTTIME_REQUEST, partTimeList);
+  yield takeLatest(INSERT_PARTTIME_REQUEST, insertParttime);
 }
 
 export default function* partTimeSaga() {

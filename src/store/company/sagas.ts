@@ -137,6 +137,7 @@ function* companyUpdate({
     data.append("comId", id);
 
     imageList.forEach((image) => data.append("files", image));
+    console.log(data.getAll("files"));
 
     const response = yield call(updateCompany, { data });
     const { status } = response;

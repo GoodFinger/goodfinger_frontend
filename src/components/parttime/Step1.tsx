@@ -56,7 +56,7 @@ function Step1({
         <span>근무지</span>
         <select onChange={changeComapy} value={company}>
           {companyList.map((data) => (
-            <option key={data.id} value={data.id}>
+            <option key={data.id} value={data.id} selected={data.id === company}>
               {data.name}
             </option>
           ))}
@@ -75,16 +75,34 @@ function Step1({
       </InputLine>
       <InputLine>
         <span>날짜</span>
-        <input type="text" value={startDate} onChange={setStartDate} />
+        <TextField
+          id="startDate"
+          label="시작날짜"
+          type="date"
+          value={startDate}
+          onChange={setStartDate}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
         ~
-        <input type="text" value={endDate} onChange={setEndDate} />
+        <TextField
+          id="endDate"
+          label="종료날짜"
+          type="date"
+          value={endDate}
+          onChange={setEndDate}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
       </InputLine>
       <InputLine>
         <span>시간</span>
         <TextField
           label="시작시간"
           type="time"
-          defaultValue={startTime}
+          value={startTime}
           InputLabelProps={{
             shrink: true,
           }}
@@ -97,7 +115,7 @@ function Step1({
         <TextField
           label="종료시간"
           type="time"
-          defaultValue={endTime}
+          value={endTime}
           InputLabelProps={{
             shrink: true,
           }}
