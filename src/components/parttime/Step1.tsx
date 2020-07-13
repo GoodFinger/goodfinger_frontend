@@ -56,7 +56,7 @@ function Step1({
         <span>근무지</span>
         <select onChange={changeComapy} value={company}>
           {companyList.map((data) => (
-            <option key={data.id} value={data.id} selected={data.id === company}>
+            <option key={data.id} value={data.id}>
               {data.name}
             </option>
           ))}

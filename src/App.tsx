@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
 import dotenv from "dotenv";
 
@@ -12,22 +12,10 @@ import CompanyAddContainer from "containers/company/CompanyAddContainer";
 import CompanyUpdateContainer from "containers/company/CompanyUpdateContainer";
 import PartTimeAddContainer from "containers/boss/PartTimeAddContainer";
 import "./App.css";
-import { useDispatch } from "react-redux";
-import { setUserInfo } from "store/user/actions";
 
 dotenv.config();
 
 const App: React.FC = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const userInfo = localStorage.getItem("goodfinger");
-    if (userInfo) {
-      const data = JSON.parse(userInfo);
-      dispatch(setUserInfo(data));
-    }
-  });
-
   return (
     <>
       <Route exact path="/" component={LoginContainer} />

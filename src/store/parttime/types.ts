@@ -29,9 +29,16 @@ export interface PartTime {
   etc: EtcOption;
   jobOffer: JobOffer;
   memo: string;
+  partTimeInfo: Array<PartTimeInfo>;
   applicant?: Array<string>;
   questionList?: Array<Question>;
   applicant_questions?: Array<string>;
+}
+
+export interface PartTimeInfo {
+  title: string;
+  content: string;
+  id: string;
 }
 
 export interface EtcOption {
@@ -52,8 +59,9 @@ export interface ApplicantQuestion {
 }
 
 export interface ApplicantQ {
+  applicantQId: string;
   applicantQContent: string;
-  applicantQAnswer: Array<ApplicantAnswer>;
+  applicantQAnswer?: Array<ApplicantAnswer>;
 }
 
 export interface ApplicantAnswer {
@@ -184,25 +192,7 @@ export interface DetailPartTimeFailureAction {
 export interface InsertPartTimeRequestAction {
   type: typeof INSERT_PARTTIME_REQUEST;
   parttime: PartTime;
-  email: string;
-  flag: string; // is parttime announcement finished?
-  createDate: string;
-  company: string; //company id? or company name?
-  category: string;
-  locationCity: string;
-  locatinDistrict: string;
-  recruitment: number;
-  preferredSex: string;
-  preferredAge: Array<number>;
-  task: string;
-  startDate: string;
-  endDate: string;
-  startTime: string;
-  endTime: string;
-  salary: Array<string>; // or Array<number>
-  etc: EtcOption;
-  jobOffer: JobOffer;
-  memo: string;
+  question: Array<ApplicantQ>;
 }
 
 export interface InsertPartTimeSuccessAction {

@@ -10,12 +10,26 @@ import rootReducer, { rootSaga } from "./store";
 import { browserHistory } from "lib/historyUtils";
 import "./index.css";
 import { Router } from "react-router-dom";
+import { setUserInfo } from "store/user/actions";
 
 const sagaMiddleware = createSagaMiddleware();
 const logger = createLogger();
 
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware, logger));
+
+function loadUser() {
+  try {
+    const data = JSON.parse(localStorage.getItem("goodfinger") || "{}");
+    if (!data.email) return;
+
+    store.dispatch(setUserInfo(data));
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 sagaMiddleware.run(rootSaga);
+loadUser();
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,4 +1,5 @@
 import { client1, client2, client3 } from "./client";
+import { ApplicantQ } from "store/parttime/types";
 
 export const insertCompany = ({ data }: { data: any }) => {
   const response = client1.post("/com/insert", data, {
@@ -55,7 +56,13 @@ export const getPartTimeList = ({ email }: { email: string }) => {
   return response;
 };
 
-export const addParttime = (parttime: any) => {
-  const response = client3.post("/announcement/insert", parttime);
+export const addParttime = ({
+  parttime,
+  question,
+}: {
+  parttime: any;
+  question: Array<ApplicantQ>;
+}) => {
+  const response = client3.post("/announcement/insert", { parttime, question });
   return response;
 };

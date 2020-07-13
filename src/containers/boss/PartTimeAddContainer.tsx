@@ -7,13 +7,18 @@ import { getCompanyList } from "store/company/actions";
 import { RootState } from "store";
 import useInput from "lib/useInput";
 import { addPartTime } from "store/parttime/actions";
-import { PartTime } from "store/parttime/types";
+import { PartTime, ApplicantQ, PartTimeInfo } from "store/parttime/types";
 import Step2 from "components/parttime/Step2";
+import Step3 from "components/parttime/Step3";
+import Step4 from "components/parttime/Step4";
+import { randomStr } from "lib/common";
 
 interface PartTimeProps {}
 const PartTimeAddContainer: React.FC<PartTimeProps> = () => {
   const { email } = useSelector((state: RootState) => state.user);
   const { companyList } = useSelector((state: RootState) => state.company);
+  const { setPartTime } = useSelector((state: RootState) => state.partTime);
+
   const [step, setStep] = useState(1);
   const [company, setCompany] = useState(companyList[0] ? companyList[0].id : "");
   const [category, setCategory] = useState<Array<string>>([]);
@@ -28,6 +33,8 @@ const PartTimeAddContainer: React.FC<PartTimeProps> = () => {
   const [preferredSex, setPreferredSex] = useState("female");
   const [preferredAge, setPreferredAge] = useState<Array<number>>([]);
   const [preferredFlag, setPreferredFlag] = useState(false);
+  const [question, setQuestion] = useState<Array<ApplicantQ>>([]);
+  const [partTimeInfo, setPartTimeInfo] = useState<Array<PartTimeInfo>>(setPartTime.partTimeInfo);
   const dispatch = useDispatch();
 
   const moveNext = () => {
@@ -103,9 +110,9 @@ const PartTimeAddContainer: React.FC<PartTimeProps> = () => {
   };
 
   const handlePreferredFlag = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+    const { id } = e.target;
 
-    if (value) {
+    if (id === "preferred_no") {
       setPreferredFlag(false);
     } else {
       setPreferredFlag(true);
@@ -141,15 +148,54 @@ const PartTimeAddContainer: React.FC<PartTimeProps> = () => {
       picture: [],
       memo: "ihihihi",
       applicant_questions: [],
+      partTimeInfo,
     } as PartTime;
 
-    dispatch(addPartTime({ parttime }));
+    dispatch(addPartTime({ parttime, question }));
+  };
+
+  const addQuestion = () => {
+    setQuestion(question.concat({ applicantQId: randomStr(), applicantQContent: "" }));
+  };
+
+  const removeQuestion = (e: React.MouseEvent<HTMLElement>) => {
+    const questionid = e.currentTarget.getAttribute("data-questionid");
+
+    setQuestion(question.filter((data) => data.applicantQId !== questionid));
+  };
+
+  const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, dataset } = e.target;
+    const { questionid } = dataset;
+
+    setQuestion(
+      question.map((data) => {
+        if (questionid === data.applicantQId) {
+          data.applicantQContent = value;
+        }
+
+        return data;
+      })
+    );
+  };
+
+  const handlePartTimeInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, dataset } = e.target;
+    const { infoid } = dataset;
+
+    setPartTimeInfo(
+      partTimeInfo.map((data) => {
+        if (data.id === infoid) {
+          data.content = value;
+        }
+        return data;
+      })
+    );
   };
 
   return (
     <Wrapper>
       <Steps step={step} />
-      <button onClick={moveBack}>뒤로가기</button>
       {step === 1 && (
         <Step1
           company={company}
@@ -184,8 +230,23 @@ const PartTimeAddContainer: React.FC<PartTimeProps> = () => {
           handlePreferredSex={handlePreferredSex}
           handlePreferredAge={handlePreferredAge}
           handlePreferredFlag={handlePreferredFlag}
+          moveNext={moveNext}
+          moveBack={moveBack}
         />
       )}
+      {step === 3 && (
+        <Step3
+          question={question}
+          addQuestion={addQuestion}
+          removeQuestion={removeQuestion}
+          partTimeInfo={partTimeInfo}
+          handlePartTimeInfoChange={handlePartTimeInfoChange}
+          handleQuestionChange={handleQuestionChange}
+          moveNext={moveNext}
+          moveBack={moveBack}
+        />
+      )}
+      {step === 4 && <Step4 />}
     </Wrapper>
   );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 interface Step2Props {
   recruitment: number;
@@ -9,6 +10,8 @@ interface Step2Props {
   handlePreferredSex: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handlePreferredAge: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handlePreferredFlag: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  moveNext: () => void;
+  moveBack: () => void;
 }
 
 function Step2({
@@ -20,9 +23,14 @@ function Step2({
   handlePreferredSex,
   handlePreferredAge,
   handlePreferredFlag,
+  moveNext,
+  moveBack,
 }: Step2Props) {
   return (
     <div>
+      <div>
+        <button onClick={moveBack}>뒤로가기</button>
+      </div>
       <div>
         <div>인원</div>
         <input type="number" value={recruitment} onChange={handleRecruitment} />
@@ -33,7 +41,7 @@ function Step2({
           type="radio"
           name="preferredAge"
           id="preferred_no"
-          value="yes"
+          value="no"
           onChange={handlePreferredFlag}
           checked={!preferredFlag}
         />
@@ -42,7 +50,7 @@ function Step2({
           type="radio"
           name="preferredAge"
           id="preferred_yes"
-          value="no"
+          value="yes"
           onChange={handlePreferredFlag}
           checked={preferredFlag}
         />
@@ -113,6 +121,9 @@ function Step2({
           id="sex_male"
         />
         <label htmlFor="sex_male">남성</label>
+      </div>
+      <div>
+        <button onClick={moveNext}>MoveNext</button>
       </div>
     </div>
   );

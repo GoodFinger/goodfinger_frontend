@@ -43,7 +43,7 @@ import {
   DELETE_QUESTION_REUQEST,
   INSERT_ANSWER_REQUEST,
   UPDATE_ANSWER_REQUEST,
-  DELETE_ANSWER_REQUEST
+  DELETE_ANSWER_REQUEST,
 } from "./types";
 
 const initialState: ParttimeList = {
@@ -67,24 +67,29 @@ const initialState: ParttimeList = {
     startTime: "",
     endTime: "",
     salary: [],
+    partTimeInfo: [
+      { title: "근무지에 대한 간단 소개", content: "", id: "info_introduction" },
+      { title: "어떤 업무를 맡게 되나요?", content: "", id: "info_task" },
+      { title: "근무분위기가 궁금해요", content: "", id: "indo_mood" },
+    ],
     etc: {
       salaryRightNow: "",
       breaktime: "",
-      oneDayWorker: ""
+      oneDayWorker: "",
     },
     jobOffer: {
       introduction: "",
-      picture: []
+      picture: [],
     },
     memo: "",
     applicant: [],
-    questionList: []
+    questionList: [],
   },
   applicantQuestion: {
     annountmentId: "",
-    applicantQList: []
+    applicantQList: [],
   },
-  errMsg: ""
+  errMsg: "",
 };
 
 const partTimeReducer = (state = initialState, action: PartTimeActionTypes) => {
@@ -116,7 +121,7 @@ const partTimeReducer = (state = initialState, action: PartTimeActionTypes) => {
     case DELETE_ANSWER_FAILURE:
       return {
         ...state,
-        loading: false
+        loading: false,
       };
     case LIST_PARTTIME_REQUEST:
     case DETAIL_PARTTIME_REQUEST:
@@ -134,25 +139,25 @@ const partTimeReducer = (state = initialState, action: PartTimeActionTypes) => {
     case DELETE_ANSWER_REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case LIST_PARTTIME_SUCCESS:
       return {
         ...state,
         partTimeList: action.partTimeList,
-        loading: false
+        loading: false,
       };
     case DETAIL_PARTTIME_SUCCESS:
       return {
         ...state,
         loading: false,
-        selPartTime: action.selPartTime
+        selPartTime: action.selPartTime,
       };
     case LIST_QUESTION_SUCCESS:
       return {
         ...state,
         loading: false,
-        questionList: action.questionList
+        questionList: action.questionList,
       };
     default:
       return state;

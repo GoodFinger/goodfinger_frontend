@@ -12,9 +12,9 @@ import {
 } from "./types";
 import { getPartTimeList, addParttime } from "lib/api/api";
 
-function* insertParttime({ parttime }: InsertPartTimeRequestAction) {
+function* insertParttime({ parttime, question }: InsertPartTimeRequestAction) {
   try {
-    const response = yield call(addParttime, parttime);
+    const response = yield call(addParttime, { parttime, question });
     const { status } = response;
 
     if (status === 200) {

@@ -39,7 +39,7 @@ export const signupUser = ({
 });
 
 export const setUserInfo = (data: User) => ({
-  type: SET_USER_INFO,
+  type: SET_USER_INFO as typeof SET_USER_INFO,
   data,
 });
 
